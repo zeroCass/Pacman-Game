@@ -2,6 +2,8 @@
 package pacmangame;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import pacman_menu.menu;
 
 /**
  *
@@ -9,12 +11,23 @@ import javax.swing.JFrame;
  */
 public class PacmanGame extends JFrame{
 
-
     public static void main(String[] args) {
+        //System.out.println("entra qui");
+       // menu_principal menu = new menu_principal();
+       SwingUtilities.invokeLater(new Runnable() {
+        public void run() {
+            menu gui = new menu();
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(gui);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+        }
+    });
+        System.out.println("passa ?");
         
-
-        
-        JFrame Game = new JFrame();
+       /* JFrame Game = new JFrame();
         GameEngine gameEngine = new GameEngine();
         Game.add(gameEngine);
         Game.setTitle("Pacman");
@@ -36,11 +49,11 @@ public class PacmanGame extends JFrame{
             }catch (Exception e) {
             }
         }*/
-        try {
+        /*try {
             gameEngine.thread.join();
             }catch (Exception e) {
             }
-        System.out.println("Acabou");
+        System.out.println("Acabou");*/
         
         
     }
