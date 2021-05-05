@@ -138,7 +138,7 @@ public class GhostRed extends Entity {
                 //check if the position is valid
                 if (current.getY() + position[i][0] >= 0 && current.getY() + position[i][0] < GameEngine.MAZE_SIZE_Y
                     && current.getX() + position[i][0] >= 0 && current.getX() + position[i][0] < GameEngine.MAZE_SIZE_X
-                    && map.screenData[pos] == 0 || map.screenData[pos] == 1 || map.screenData[pos] == 28) {
+                    && map.screenData[pos] == 0 || map.screenData[pos] == 63 || map.screenData[pos] == 64 || map.screenData[pos] == 55) {
                     
                     //creat a aux node that contain the next position
                     Node newNode = new Node(current.getY() + position[i][0],current.getX() + position[i][1]);                     
@@ -220,8 +220,9 @@ public class GhostRed extends Entity {
                 y = (int)((Math.random() * max_y - min_y) + min_y);
                 x = (int)((Math.random() * max_x - min_x) + min_x);
                 if (map.screenData[(y * GameEngine.TILE_SIZE) + x] == 0 
-                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 1
-                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 28)
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 64
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 63
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 55)
                     break;
             }
         
@@ -243,8 +244,8 @@ public class GhostRed extends Entity {
                               + Math.pow(pacman.getX()/ GameEngine.TILE_SIZE  - x, 2));
                     
             if ((map.screenData[(y * GameEngine.TILE_SIZE) + x] == 0 
-                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 1
-                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 28)
+                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 63
+                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 64)
                 && distance > 10) {
                 break;
             }
@@ -352,7 +353,6 @@ public class GhostRed extends Entity {
         //if it is, update the movement
         
         //System.out.println(this.direction);
-        //System.out.println(map.screenData[this.y /30 * this.x /30 + 30]);
         
         switch (this.direction) {
                     case "up":
@@ -416,10 +416,10 @@ public class GhostRed extends Entity {
               if(this.x%GameEngine.TILE_SIZE == 0 && this.y% GameEngine.TILE_SIZE ==0){
                   int pos = (this.x + (GameEngine.TILE_SIZE * this.dx)) /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)((this.y+ (GameEngine.TILE_SIZE * this.dy))/GameEngine.TILE_SIZE);
                   //se nao for valida, a posicao é nula
-                  if(map.screenData[pos] != 0 && map.screenData[pos] != 1 && map.screenData[pos] != 28)
+                  if(map.screenData[pos] != 0 && map.screenData[pos] != 63 && map.screenData[pos] != 64 && map.screenData[pos] != 55)
                     this.direction = "none";
               }
-        this.hitbox = new Rectangle(this.x, this.y, GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);
+        this.hitbox = new Rectangle (this.x + 10, this.y + 10, GameEngine.TILE_SIZE - 20,GameEngine.TILE_SIZE - 20);
         
         
        /* if (pacman.getX() == this.x && pacman.getY() == this.y
@@ -457,9 +457,9 @@ public class GhostRed extends Entity {
         }*/
         g.drawImage(this.ghostImage[this.ghostImageIdx], this.x, this.y, null);
         
-        Rectangle gh = new Rectangle(this.x, this.y, 30, 30);
+        //Rectangle gh = new Rectangle(this.x, this.y, 30, 30);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(gh);
+        g2d.draw(this.hitbox);
     }
    
     

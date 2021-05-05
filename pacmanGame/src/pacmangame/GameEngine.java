@@ -23,16 +23,17 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import pacmangame.entity.Blinky;
 import pacmangame.entity.Ghost;
 import pacmangame.entity.GhostRed;
 import pacmangame.entity.Pacman;
 
 public class GameEngine extends Canvas implements Runnable, KeyListener {
-    public static final int SCREEN_WIDTH = 870;
-    public static final int SCREEN_HEIGHT = 570;
+    public static final int SCREEN_WIDTH = 900;
+    public static final int SCREEN_HEIGHT = 600;
     public static final int TILE_SIZE = 30; //size in pixels of each object in game
-    public static final int MAZE_SIZE_Y = 19;
-    public static final int MAZE_SIZE_X = 29;
+    public static final int MAZE_SIZE_Y = 20;
+    public static final int MAZE_SIZE_X = 30;
     public static int timerEvent = 0;
     public static int scaredTimer = 0;
     public static String ghostMode; //scatter,chaser,scared, eaten
@@ -48,9 +49,12 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     //define if the update/draw is going on
     public static boolean pauseTimer = false; 
     
+    public static int lives;
+    
     //objects
     Pacman pacman;
     GhostRed ghost;
+    //Ghost blinky;
     Ghost blinky;
     Map map;
     
@@ -71,11 +75,14 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //init the variables and objects
         pacman = new Pacman(11, 4); //!! the fisrt position !!
         ghost = new GhostRed(9,15);
-        blinky = new Ghost(9,14, "blinky");
+        //blinky = new Ghost(9,14, "blinky");
+        blinky = new Blinky(9,14);
         
         map = new Map();
         ghostMode = "scatter";
         this.score = 0;
+        
+        this.lives = pacman.lives;
         
        if (running)return;
         running = true;
@@ -86,6 +93,35 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
     }
     
+    public synchronized void restart () {
+        
+        if (lives > 0) {
+          //init the variables and objects
+            pacman = new Pacman(11, 4); //!! the fisrt position !!
+            ghost = new GhostRed(9,15);
+            //blinky = new Ghost(9,14, "blinky");
+            blinky = new Blinky(9,14);
+
+            //map = new Map();
+            ghostMode = "scatter";
+            //this.score = 0;
+
+           if (running)return;
+            running = true;
+            run();
+            //thread = new Thread(this);
+            //thread.start();  
+        }else {
+            stop();
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
     public synchronized void stop () {
         if (!running)return;
         running = false;
@@ -95,6 +131,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return;
         
     }
     
@@ -159,7 +196,8 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         pacman.updateMovement(map); //move the pacman
         checkPills(pacman.getY(), pacman.getX()); //check if the players got the pill
         ghost.updateMovement(map, pacman);
-        blinky.updateMovement(map, pacman, pacman.getY() / TILE_SIZE, pacman.getX() / TILE_SIZE);
+        //blinky.updateMovement(map, pacman, pacman.getY() / TILE_SIZE, pacman.getX() / TILE_SIZE);
+        blinky.updateMovement(map, pacman);
         
         //check gameover
         //Rectangle pac = new Rectangle(pacman.getX(), pacman.getY(), 30, 30);
@@ -167,8 +205,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
         //verifica se o ghost esta em modo scared e colidiu com o pacman
         //se sim, entra em modo eaten e
-       
-        /*if (ghostMode.equals("scared")) {
+        if (ghostMode.equals("scared")) {
             if (ghost.hitbox.intersects(pacman.hitbox) 
                && !ghost.getCurrentMode().equals("eaten") && ghost.getCurrentMode().equals("scared")) {
                 //teste = true;
@@ -182,9 +219,13 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                && !ghost.getCurrentMode().equals("eaten") && !ghost.getCurrentMode().equals("scared")) {
                 death.play();
                 System.out.println("GameOver");
-                pauseTimer = true;
-                waitUntilDone(4000, true);
-                System.exit(0);
+                //pauseTimer = true;
+                //waitUntilDone(4000, false);
+                pacman.lives--;
+                lives--;
+                
+                running = false;
+                restart();
             }
                 
             if (blinky.hitbox.intersects(pacman.hitbox) 
@@ -197,10 +238,16 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             else if (blinky.hitbox.intersects(pacman.hitbox) 
                 && !blinky.getCurrentMode().equals("eaten") && !ghost.getCurrentMode().equals("scared")) {
                 death.play();
+                pacman.lives--;
+                lives--;
                 System.out.println("GameOver");
-                pauseTimer = true;
-                waitUntilDone(4000, true);
-                System.exit(0);
+                //pauseTimer = true;
+                //waitUntilDone(4000, false);
+                running = false;
+                restart();
+               
+                
+                
             }
                 
             
@@ -211,11 +258,23 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             System.out.println("GameOver");
             pauseTimer = true;
             waitUntilDone(4000, true);
-            System.exit(0);
+            //System.exit(0);
+            pacman.lives--;
+            lives--;
+            //pacman = new Pacman(11, 4); //!! the fisrt position !!
+            //ghost = new GhostRed(9,15);
+            //blinky = new Ghost(9,14, "blinky");
+            //ghostMode = "scatter";
+            running = false;
+            restart();
+            //stop();
+            //this.restart();
+            
+           
             
             
                 
-        }*/
+        }
         
         //check gameOver
         /*if (gh.intersects(pac)) {
@@ -223,7 +282,12 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                 GameEngine.running = false;
             }*/
             
-        
+        /*if (pacman.lives == 0) {
+            death.play();
+            System.out.println("GameOver");
+            pauseTimer = true;
+            waitUntilDone(4000, true);
+        }*/
         
     }
     
@@ -270,6 +334,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
         
         while (running) {
+            //System.out.println("loop");
             if (!pauseTimer) {
                 
              long currentTime = System.nanoTime();
@@ -305,16 +370,16 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                 //if passed 10 sec, change the current mode scatter
                 if (timerEvent == 10000 && ghostMode.equals("scatter")) {
                     //System.out.println(timerEvent);
-                    //changeMode();
+                   changeMode();
                     timerEvent = 0; 
                 }
                 //if passed 20 sec change the chaser mode to scatter 
                 else if (timerEvent == 20000 && ghostMode.equals("chaser")) {
                     //System.out.println(timerEvent);
-                    //changeMode();
+                    changeMode();
                     timerEvent = 0; 
                  //reset the state of ghost of scared to the previus state
-                }else if (scaredTimer >= 10000 && ghostMode.equals("scared")) {
+                }else if (scaredTimer == 10000 && ghostMode.equals("scared")) {
                     scaredTimer = 0;
                     ghostMode = oldGhostMode;
                     System.out.println(oldGhostMode);
@@ -399,12 +464,12 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
      //check if the postiion of the pacman is a pill
     public void checkPills(int y, int x) {
         //normal pill
-        if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 1){
+        if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 63){
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             this.score++;
         }
         //super pill
-        else if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 28) {
+        else if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 64) {
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             this.score+=50;
             
@@ -417,8 +482,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             ghost.setCurrentMode("scared");
             blinky.setCurrentMode("scared");
             
-            
-            
+  
             
         }
        //System.out.println("Pontos :" + score); 

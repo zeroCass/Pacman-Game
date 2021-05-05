@@ -11,6 +11,9 @@ public class PacmanGame extends JFrame{
 
 
     public static void main(String[] args) {
+        
+
+        
         JFrame Game = new JFrame();
         GameEngine gameEngine = new GameEngine();
         Game.add(gameEngine);
@@ -22,6 +25,24 @@ public class PacmanGame extends JFrame{
         Game.setLocationRelativeTo(null);
         gameEngine.start();
         //Game.setContentPane(new GameEngine());
+        
+        /*while (true) {
+            try {
+                gameEngine.thread.join();
+                if (gameEngine.lives > 0)
+                    gameEngine.restart();
+                else
+                    break;
+            }catch (Exception e) {
+            }
+        }*/
+        try {
+            gameEngine.thread.join();
+            }catch (Exception e) {
+            }
+        System.out.println("Acabou");
+        
+        
     }
     
 }

@@ -15,29 +15,33 @@ public class Pacman extends Entity {
     Image [] pacmanImage;
     private int pacmanImageIdx; //idx of array of images
     
+    public int lives;
     
     //constructor
     public Pacman (int y, int x) {
         this.y = y * GameEngine.TILE_SIZE;
         this.x = x * GameEngine.TILE_SIZE;
-        this.hitbox = new Rectangle (this.x, this.y , GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);
+        this.hitbox = new Rectangle (this.x, this.y, GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);
         this.velocity = 2;
         this.direction = "none";
         this.next_direction = "none";
         this.pacmanImageIdx = 0;
         pacmanImage = new Image[6];
+        
+        this.lives = 3;
         loadImages();
+        
     }
     
     
     @Override
     protected void loadImages() {
-        pacmanImage[0] = new ImageIcon("images/PacMan/pacman.gif").getImage(); //stand by
-        pacmanImage[1] = new ImageIcon("images/PacMan/pacman_dying.gif").getImage();
-        pacmanImage[2] = new ImageIcon("images/PacMan/pacman_right.gif").getImage();
-        pacmanImage[3] = new ImageIcon("images/PacMan/pacman_left.gif").getImage();
-        pacmanImage[4] = new ImageIcon("images/PacMan/pacman_up.gif").getImage();
-        pacmanImage[5] = new ImageIcon("images/PacMan/pacman_down.gif").getImage();
+        pacmanImage[0] = new ImageIcon("images/pacman/pacman.gif").getImage(); //stand by
+        pacmanImage[1] = new ImageIcon("images/pacman/pacman_dying.gif").getImage();
+        pacmanImage[2] = new ImageIcon("images/pacman/pacman_right.gif").getImage();
+        pacmanImage[3] = new ImageIcon("images/pacman/pacman_left.gif").getImage();
+        pacmanImage[4] = new ImageIcon("images/pacman/pacman_up.gif").getImage();
+        pacmanImage[5] = new ImageIcon("images/pacman/pacman_down.gif").getImage();
     }
 
     
@@ -47,7 +51,7 @@ public class Pacman extends Entity {
              int pos = (this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)((this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE);
              //System.out.println(pos);
              //System.out.println((map.isHome(((this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE), ((this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE))));
-             if(map.screenData[pos] == 0 || map.screenData[pos]== 1 || map.screenData[pos] == 28) {
+             if(map.screenData[pos] == 0 || map.screenData[pos]== 63 || map.screenData[pos] == 64) {
                    this.direction = this.next_direction;
                    //this.next_direction = "none";
              }//else this.next_direction = "none";
@@ -90,12 +94,12 @@ public class Pacman extends Entity {
               if(this.x%GameEngine.TILE_SIZE == 0 && this.y% GameEngine.TILE_SIZE ==0){
                   int pos = (this.x + (GameEngine.TILE_SIZE * this.dx)) /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)((this.y+ (GameEngine.TILE_SIZE * this.dy))/GameEngine.TILE_SIZE);
                   //se nao for valida, a posicao é nula
-                  if(map.screenData[pos] != 0 && map.screenData[pos] != 1 && map.screenData[pos] != 28)
+                  if(map.screenData[pos] != 0 && map.screenData[pos] != 63 && map.screenData[pos] != 64)
                     this.direction = "none";
               }
               
           //update the hitbox    
-         this.hitbox = new Rectangle (this.x + 10, this.y, GameEngine.TILE_SIZE - 10,GameEngine.TILE_SIZE -10);
+         this.hitbox = new Rectangle (this.x + 10, this.y + 10, GameEngine.TILE_SIZE - 20 ,GameEngine.TILE_SIZE - 20);
               
     }
 

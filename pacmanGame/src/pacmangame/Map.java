@@ -18,13 +18,13 @@ public class Map {
     
     private int map[];
     public int screenData[];
-    public int [][] ghostHome = {{9,14},{9,15}};
+    public int [][] ghostHome = {{9,13},{9,14},{9,15}};
     
     //constructor
     public Map() {
-        
-            this.sizeX = 29; //this is the map lenght in X coord
-            this.sizeY = 19;//this is the map lenght in X coord
+            this.sizeY = GameEngine.MAZE_SIZE_Y;//this is the map lenght in X coord
+            this.sizeX = GameEngine.MAZE_SIZE_X; //this is the map lenght in X coord
+            
             //map init
            /* map = new int[]{
     		 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 
@@ -48,7 +48,7 @@ public class Map {
     		 6, 1, 1, 1,15, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,15, 1, 1, 0, 7, 
     		 4, 9, 9, 9,26, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,26, 9, 9, 9, 5, 
                 };*/
-               /* map = new int []{
+                /*map = new int []{
                 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3,
                 7, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 6,
                 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6,
@@ -70,29 +70,75 @@ public class Map {
                 7, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28, 6,
                 4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 5, 
                 };*/
-               
-               map = new int [] {
-                 2, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,27, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 3,
-                7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6,
-                7, 0,29,37,37,30, 0,29,37,37,37,37,30, 0,11, 0,29,37,37,37,37,37,30, 0,29,37,30, 0, 6,
-                7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6,
-                7, 0,13,15,22,15,12, 0, 0, 0,10, 0,13,15,22,15,12, 0,18,15,12, 0,13,15,22,15,12, 0, 6,
-                7, 0, 0, 0,14, 0, 0, 0, 0, 0,14, 0, 0, 0,14, 0, 0, 0,14, 0, 0, 0, 0, 0,14, 0, 0, 0, 6,
-		7, 0,32, 0,14, 0,18,15,19, 0,21,15,12, 0,11, 0,13,15,23, 0,10, 0,10, 0,11, 0,32, 0, 6,
-                7, 0,38, 0,14, 0,14, 0,14, 0,14, 0, 0, 0, 0, 0, 0, 0,14, 0,14, 0,14, 0, 0, 0,31, 0, 6,
-                7, 0,38, 0,14, 0,14, 0,14, 0,11, 0,35, 0, 0, 0,36, 0,11, 0,16,15,17, 0,10, 0, 0, 0, 6,
-                7, 0,31, 0,11, 0,21,15,17, 0, 0, 0, 7, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0,21,15,19, 0, 6,
-                7, 0, 0, 0, 0, 0,14, 0, 0, 0,10, 0,33, 8, 8, 8,34, 0,10, 0,18,15,12, 0,14, 0,14, 0, 6,
-		7, 0,13,19, 0, 0,11, 0,10, 0,14, 0, 0, 0, 0, 0, 0, 0,14, 0,14, 0, 0, 0,14, 0,14, 0, 6,
-                7, 0, 0,21,12, 0, 0, 0,14, 0,11, 0,13,15,22,15,12, 0,11, 0,14, 0,13,15,17, 0,11, 0, 6,
-                25,12,0,14, 0, 0,13,15,23, 0, 0, 0, 0, 0,11, 0, 0, 0, 0, 0,11, 0, 0, 0, 0, 0, 0, 0, 6,	
-                7, 0, 0,16,12, 0, 0, 0,16,12, 0,10, 0, 0, 0, 0, 0,10, 0, 0, 0, 0,13,19, 0,18,15,15,24,
-                7, 0, 0, 0, 0, 0,10, 0, 0, 0, 0,14, 0,13,22,12, 0,14, 0,10, 0, 0, 0,14, 0,14, 0, 0, 6,                
-                7, 0,13,15,15,15,20,15,15,12, 0,11, 0, 0,11, 0, 0,16,15,20,15,12, 0,14, 0,16,12, 0, 6,
-                7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,14, 0, 0, 0, 0, 6,                
-                4, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,26, 8, 8, 8, 8, 5, 
-          
-               };
+                
+               /* map = new int [] {
+                 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,10, 9,11, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,0,
+                 8,64,63,63,63,63,63,63,63,63,63,63,63,63,12,63,63,63,63,63,63,63,63,63,63,63,63,64, 4,0,
+                 8,63,47,51,51,48,63,47,51,51,51,51,48,63,13,63,47,51,51,51,51,48,63,47,51,51,48,63, 4,0,
+                 8,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63, 4,0,
+                 8,63,22,26,29,30,18,63,63,63,27,63,22,26,29,30,18,63,28,17,18,63,22,26,29,30,18,63, 4,0,
+                 8,63,63,63,31,63,63,63,63,63,45,63,63,63,31,63,63,63,33,63,63,63,63,63,31,63,63,63, 4,0,
+		 8,63,49,63,12,63,28,17,32,63,44,46,18,63,13,63,22,36,34,63,27,63,27,63,13,63,49,63, 4,0,
+                 8,63,52,63,12,63,12,0,12,63,43, 0, 0, 0, 0, 0, 0, 0,35,63,12,63,12,63,63,63,50,63, 4,0,
+                 8,63,52,63,12,63,45,0,12,63,13, 0,53,54,55,56,57, 0,13,63,42,17,37,63,27,63,63,63, 4,0,
+                 8,63,50,63,13,63,44,46,37,63,63, 0,62, 0, 0, 0,58, 0,63,63,63,63,63,63,44,46,32,63, 4,0,
+                 8,63,63,63,63,63,43,63,63,63,27, 0,61,60,60,60,59, 0,27,63,28,17,18,63,43,63,12,63, 4,0,
+		 8,63,22,32,63,63,13,63,27,63,12, 0, 0, 0, 0, 0, 0, 0,12,63,12,63,63,63,12,63,12,63, 4,0,
+		 8,63,63,44,18,63,63,63,33,63,13,63,22,26,29,30,18,63,13,63,12,63,22,17,37,63,13,63, 4,0,
+                16,63,63,43,63,63,22,36,34,63,63,63,63,63,13,63,63,63,63,63,13,63,63,63,63,63,63,63,24,0,
+                14,18,63,42,18,63,63,63,42,18,63,27,63,63, 0,63,63,27,63,63,63,63,22,32,63,28,17,17,23,0,               
+                15,63,63,63,63,63,27,63,63,63,63,12,63,22,29,18,63,12,63,27,63,63,63,12,63,12,64,63,25,0,
+                 8,63,22,17,17,40,39,38,17,18,63,13,63,63,13,63,63,42,40,39,38,18,63,12,63,42,18,63, 4,0, 
+		 8,64,63,63,63,63,63,63,63,63,63,63,63,63,64,63,63,63,63,63,63,63,63,12,63,63,63,63, 4,0,
+                 7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,21,19,20, 6, 6, 6, 5,0,
+                 7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,21,19,20, 6, 6, 6, 5,0,
+                 };*/
+                map = new int []  {
+                 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,10, 9,11, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+                 8,64,63,63,63,63,63,63,63,63,63,63,63,63,12,63,63,63,63,63,63,63,63,63,63,63,63,64,64, 4,
+                 8,63,47,51,51,48,63,47,51,51,51,51,48,63,13,63,47,51,51,51,51,48,63,47,51,51,48,63,63, 4,
+                 8,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63, 4,
+                 8,63,22,26,29,30,18,63,63,63,27,63,22,26,29,30,18,63,28,17,18,63,22,26,29,30,18,63,63, 4,
+                 8,63,63,63,31,63,63,63,63,63,45,63,63,63,31,63,63,63,33,63,63,63,63,63,31,63,63,63,63, 4,
+		 8,63,49,63,12,63,28,17,32,63,44,46,18,63,13,63,22,36,34,63,27,63,27,63,13,63,49,63,63, 4,
+                 8,63,52,63,12,63,12, 0,12,63,43, 0, 0, 0, 0, 0, 0, 0,35,63,12,63,12,63,63,63,50,63,63, 4,
+                 8,63,52,63,12,63,45, 0,12,63,13, 0,53,54,55,56,57, 0,13,63,42,17,37,63,27,63,63,63,63, 4,
+                 8,63,50,63,13,63,44,46,37,63,63, 0,62, 0, 0, 0,58, 0,63,63,63,63,63,63,44,46,32,63,63, 4,
+                 8,63,63,63,63,63,43,63,63,63,27, 0,61,60,60,60,59, 0,27,63,28,17,18,63,43,63,12,63,63, 4,
+		 8,63,22,32,63,63,13,63,27,63,12, 0, 0, 0, 0, 0, 0, 0,12,63,12,63,63,63,12,63,12,63,63, 4,
+		 8,63,63,44,18,63,63,63,33,63,13,63,22,26,29,30,18,63,13,63,12,63,22,17,37,63,13,63,63, 4,	
+                16,63,63,43,63,63,22,36,34,63,63,63,63,63,13,63,63,63,63,63,13,63,63,63,63,63,63,63,63,24,
+                14,18,63,42,18,63,63,63,42,18,63,27,63,63, 0,63,63,27,63,63,63,63,22,32,63,28,17,17,17,23,               
+                15,63,63,63,63,63,27,63,63,63,63,12,63,22,29,18,63,12,63,27,63,63,63,12,63,12,64,63,63,25,
+                8,63,22,17,17,40,39,38,17,18,63,13,63,63,13,63,63,42,40,39,38,18,63,12,63,42,18,63,63,4, 
+		 8,64,63,63,63,63,63,63,63,63,63,63,63,63,64,63,63,63,63,63,63,63,63,12,63,63,63,63,63,4,
+                 8,64,63,63,63,63,63,63,63,63,63,63,63,63,64,63,63,63,63,63,63,63,63,12,63,63,63,63,63,4,
+                 7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,21,19,20, 6, 6, 6, 6,5,
+                };
+                
+               /* map = new int [] {
+                    1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3,
+                    8,64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,64, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0,28,18,63,22,32,28,17,17,17,32, 0, 0, 0, 0, 0, 0,28,18,63,22,32,28,17,17,17,32, 0, 4,
+                    8, 0,12,63,63,63,12,12,63,63,63,13, 0, 0, 0, 0, 0, 0,12,63,63,63,12,12,63,63,63,13, 0, 4,
+                    8, 0,42,32,63,28,37,12,63,63,63,63, 0,53, 0, 0,57, 0,42,32,63,28,37,12,63,63,63,63, 0, 4,
+                    8, 0, 0,12,63,12, 0,12,63,63,63,27, 0,62, 0, 0,58, 0, 0,12,63,12, 0,12,63,63,63,27, 0, 4,
+                    8, 0, 0,12,63,12, 0,12,63,28,17,37, 0,61,60,60,59, 0, 0,12,63,12, 0,12,63,28,17,37, 0, 4,
+                    8, 0, 0,12,63,12, 0,12,63,12, 0, 0, 0, 0, 0, 0, 0, 0, 0,12,63,12, 0,12,63,12, 0, 0, 0, 4,
+                    8, 0, 0,42,17,37, 0,42,17,37, 0, 0, 0, 0, 0, 0, 0, 0, 0,16,15,17, 0,42,17,37, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+                    8,64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,64, 4,
+                    7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 5, 
+
+                };*/
            
            
            
@@ -101,7 +147,7 @@ public class Map {
                 screenData[i] = map[i];
             }
         
-            mapImages = new Image[40];
+            //mapImages = new Image[40];
             loadMapImages();
    
             
@@ -149,45 +195,73 @@ public class Map {
        
         //pacman = new ImageIcon("images/fld/monster1.png").getImage();
      
-        mapImages[0] = new ImageIcon("images/fld/00.jpg").getImage();
-        mapImages[1] = new ImageIcon("images/fld/01_ball.gif").getImage();
-        mapImages[2] = new ImageIcon("images/fld/02.jpg").getImage();
-        mapImages[3] = new ImageIcon("images/fld/03.jpg").getImage();
-        mapImages[4] = new ImageIcon("images/fld/04.jpg").getImage();
-        mapImages[5] = new ImageIcon("images/fld/05.jpg").getImage();
-        mapImages[6] = new ImageIcon("images/fld/06.jpg").getImage();
-        mapImages[7] = new ImageIcon("images/fld/07.jpg").getImage();
-        mapImages[8] = new ImageIcon("images/fld/08.jpg").getImage();
-        mapImages[9] = new ImageIcon("images/fld/09.jpg").getImage();
-        mapImages[10] = new ImageIcon("images/fld/10.jpg").getImage();
-        mapImages[11] = new ImageIcon("images/fld/11.jpg").getImage();
-        mapImages[12] = new ImageIcon("images/fld/12.jpg").getImage();
-        mapImages[13] = new ImageIcon("images/fld/13.jpg").getImage();
-        mapImages[14] = new ImageIcon("images/fld/14.jpg").getImage();
-        mapImages[15] = new ImageIcon("images/fld/15.jpg").getImage();
-        mapImages[16] = new ImageIcon("images/fld/16.jpg").getImage();
-        mapImages[17] = new ImageIcon("images/fld/17.jpg").getImage();
-        mapImages[18] = new ImageIcon("images/fld/18.jpg").getImage();
-        mapImages[19] = new ImageIcon("images/fld/19.jpg").getImage();
-        mapImages[20] = new ImageIcon("images/fld/20.jpg").getImage();
-        mapImages[21] = new ImageIcon("images/fld/21.jpg").getImage();
-        mapImages[22] = new ImageIcon("images/fld/22.jpg").getImage();
-        mapImages[23] = new ImageIcon("images/fld/23.jpg").getImage();
-        mapImages[24] = new ImageIcon("images/fld/24.jpg").getImage();
-        mapImages[25] = new ImageIcon("images/fld/25.jpg").getImage();
-        mapImages[26] = new ImageIcon("images/fld/26.jpg").getImage();
-        mapImages[27] = new ImageIcon("images/fld/27.jpg").getImage();
-        mapImages[28] = new ImageIcon("images/fld/28_power_ball.gif").getImage();
-        mapImages[29] = new ImageIcon("images/fld/29.jpg").getImage();
-        mapImages[30] = new ImageIcon("images/fld/30.jpg").getImage();
-        mapImages[31] = new ImageIcon("images/fld/31.jpg").getImage();
-        mapImages[32] = new ImageIcon("images/fld/32.jpg").getImage();
-        mapImages[33] = new ImageIcon("images/fld/33.jpg").getImage();
-        mapImages[34] = new ImageIcon("images/fld/34.jpg").getImage();
-        mapImages[35] = new ImageIcon("images/fld/35.jpg").getImage();
-        mapImages[36] = new ImageIcon("images/fld/36.jpg").getImage();
-        mapImages[37] = new ImageIcon("images/fld/37.jpg").getImage();
-        mapImages[38] = new ImageIcon("images/fld/38.jpg").getImage();
+        mapImages = new Image[65];
+	
+		mapImages[0] = new ImageIcon("images/mapa/00.jpg").getImage();
+		mapImages[1] = new ImageIcon("images/mapa/01.png").getImage();
+        mapImages[2] = new ImageIcon("images/mapa/02.png").getImage();
+        mapImages[3] = new ImageIcon("images/mapa/03.png").getImage();
+        mapImages[4] = new ImageIcon("images/mapa/04.png").getImage();
+        mapImages[5] = new ImageIcon("images/mapa/05.png").getImage();
+        mapImages[6] = new ImageIcon("images/mapa/06.png").getImage();
+        mapImages[7] = new ImageIcon("images/mapa/07.png").getImage();
+        mapImages[8] = new ImageIcon("images/mapa/08.png").getImage();
+        mapImages[9] = new ImageIcon("images/mapa/09.png").getImage();
+        mapImages[10] = new ImageIcon("images/mapa/10.png").getImage();
+        mapImages[11] = new ImageIcon("images/mapa/11.png").getImage();
+        mapImages[12] = new ImageIcon("images/mapa/12.png").getImage();
+        mapImages[13] = new ImageIcon("images/mapa/13.png").getImage();
+        mapImages[14] = new ImageIcon("images/mapa/14.png").getImage(); 
+        mapImages[15] = new ImageIcon("images/mapa/15.png").getImage();
+        mapImages[16] = new ImageIcon("images/mapa/16.png").getImage();
+        mapImages[17] = new ImageIcon("images/mapa/17.png").getImage();
+        mapImages[18] = new ImageIcon("images/mapa/18.png").getImage();
+        mapImages[19] = new ImageIcon("images/mapa/19.png").getImage();
+        mapImages[20] = new ImageIcon("images/mapa/20.png").getImage();
+        mapImages[21] = new ImageIcon("images/mapa/21.png").getImage();
+        mapImages[22] = new ImageIcon("images/mapa/22.png").getImage();
+        mapImages[23] = new ImageIcon("images/mapa/23.png").getImage();
+        mapImages[24] = new ImageIcon("images/mapa/24.png").getImage();
+        mapImages[25] = new ImageIcon("images/mapa/25.png").getImage();
+        mapImages[26] = new ImageIcon("images/mapa/26.jpg").getImage();
+        mapImages[27] = new ImageIcon("images/mapa/27.png").getImage();
+        mapImages[28] = new ImageIcon("images/mapa/28.png").getImage();
+        mapImages[29] = new ImageIcon("images/mapa/29.jpg").getImage(); 
+        mapImages[30] = new ImageIcon("images/mapa/30.png").getImage();
+        mapImages[31] = new ImageIcon("images/mapa/31.png").getImage();
+        mapImages[32] = new ImageIcon("images/mapa/32.png").getImage();
+        mapImages[33] = new ImageIcon("images/mapa/33.png").getImage();
+        mapImages[34] = new ImageIcon("images/mapa/34.jpg").getImage();
+        mapImages[35] = new ImageIcon("images/mapa/35.png").getImage();
+        mapImages[36] = new ImageIcon("images/mapa/36.png").getImage();
+        mapImages[37] = new ImageIcon("images/mapa/37.png").getImage();
+        mapImages[38] = new ImageIcon("images/mapa/38.png").getImage();
+        mapImages[39] = new ImageIcon("images/mapa/39.jpg").getImage();
+        mapImages[40] = new ImageIcon("images/mapa/40.png").getImage();
+        mapImages[41] = new ImageIcon("images/mapa/41.png").getImage();
+        mapImages[42] = new ImageIcon("images/mapa/42.png").getImage();
+        mapImages[43] = new ImageIcon("images/mapa/43.png").getImage();
+        mapImages[44] = new ImageIcon("images/mapa/44.jpg").getImage(); 
+        mapImages[45] = new ImageIcon("images/mapa/45.png").getImage();
+        mapImages[46] = new ImageIcon("images/mapa/46.png").getImage();
+        mapImages[47] = new ImageIcon("images/mapa/47.png").getImage();
+        mapImages[48] = new ImageIcon("images/mapa/48.png").getImage();
+        mapImages[49] = new ImageIcon("images/mapa/49.png").getImage();
+        mapImages[50] = new ImageIcon("images/mapa/50.png").getImage();
+        mapImages[51] = new ImageIcon("images/mapa/51.png").getImage();
+        mapImages[52] = new ImageIcon("images/mapa/52.png").getImage();
+        mapImages[53] = new ImageIcon("images/mapa/53.png").getImage();
+        mapImages[54] = new ImageIcon("images/mapa/54.png").getImage();
+        mapImages[55] = new ImageIcon("images/mapa/55.png").getImage();
+        mapImages[56] = new ImageIcon("images/mapa/56.png").getImage();
+        mapImages[57] = new ImageIcon("images/mapa/57.png").getImage();
+        mapImages[58] = new ImageIcon("images/mapa/58.png").getImage();
+        mapImages[59] = new ImageIcon("images/mapa/59.png").getImage();       
+        mapImages[60] = new ImageIcon("images/mapa/60.png").getImage();
+        mapImages[61] = new ImageIcon("images/mapa/61.png").getImage();
+        mapImages[62] = new ImageIcon("images/mapa/62.png").getImage();
+		mapImages[63] = new ImageIcon("images/mapa/63.gif").getImage();
+        mapImages[64] = new ImageIcon("images/mapa/64.gif").getImage();
                
         
     }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package pacmangame.entity;
 
 import java.awt.Color;
@@ -15,28 +11,22 @@ import javax.swing.ImageIcon;
 import pacmangame.GameEngine;
 import pacmangame.Map;
 
-/**
- *
- * @author Cass.Nero
- */
+
 public class Ghost extends Entity {
-    protected Image [] ghostImage;
-    //Image [] scaredImage;
-    protected  int ghostImageIdx;
-    protected  int scaredImageIdx;
+    Image [] ghostImage;
+    Image [] scaredImage;
+    protected int ghostImageIdx;
+    protected int scaredImageIdx;
     
-    protected  int [] targetPosition; //define wich the current target
-    protected  int [] previousPosition;
-    protected  int target_x, target_y;
+    protected int [] targetPosition; //define wich the current target
+    protected int [] previousPosition;
+    protected int target_x, target_y;
     
-    protected  boolean eaten;
-    protected  String currentMode; //scatter,chaser,scared, eaten
-    
-    protected String image_path;
+    protected boolean eaten;
+    protected String currentMode; //scatter,chaser,scared, eaten
    
-    
-        //constructor
-    public Ghost (int y, int x, String image_path) {
+    //constructor
+    public Ghost (int y, int x) {
         this.y = y * GameEngine.TILE_SIZE;
         this.x = x * GameEngine.TILE_SIZE;   
         this.velocity = 2;
@@ -45,12 +35,11 @@ public class Ghost extends Entity {
         this.eaten = false;
         
         ghostImage = new Image[11];
-        //scaredImage = new Image[6];
+        scaredImage = new Image[6];
         ghostImageIdx = 0;
         scaredImageIdx = 0;
         
-        this.image_path = image_path;
-        
+        this.hitbox = new Rectangle(this.x, this.y, GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);
         //the target vector
        // targetPosition = new int[]{18,18}; //y,x
         //previousPosition = new int[] {this.y/30, this.x/30};
@@ -60,53 +49,39 @@ public class Ghost extends Entity {
       //  this.target_y = 18;
       //  this.target_x = 18;
         
-        loadImages();    
+        loadImages();
+        
+       
         
     }
     
+    
     @Override
     protected void loadImages() {
-        ghostImage[0] = new ImageIcon("images/Blinky/" + this.image_path + "_default.png").getImage(); //stand by
-        ghostImage[1] = new ImageIcon("images/Blinky/"+ this.image_path + "_right.png").getImage();
-        ghostImage[2] = new ImageIcon("images/Blinky/" + this.image_path + "_left.png").getImage();
-        ghostImage[3] = new ImageIcon("images/Blinky/"+  this.image_path + "_up.png").getImage();
-        ghostImage[4] = new ImageIcon("images/Blinky/" + this.image_path + "_down.png").getImage();
+        
         ghostImage[5] = new ImageIcon("images/Ghost/eyes_right.gif").getImage();
         ghostImage[6] = new ImageIcon("images/Ghost/eyes_left.gif").getImage();
         ghostImage[7] = new ImageIcon("images/Ghost/eyes_up.gif").getImage();
         ghostImage[8] = new ImageIcon("images/Ghost/eyes_down.gif").getImage();
         ghostImage[9] = new ImageIcon("images/Ghost/ghost_eaten.gif").getImage();
         ghostImage[10] = new ImageIcon("images/Ghost/ghost_vulnerable.gif").getImage();
-    }
-
-    @Override
-    public void render(Graphics g) {
-        g.setColor(Color.red);
-        //g.fillRect(this.x, this.y, GameEngine.TILE_SIZE, GameEngine.TILE_SIZE);
-        //g.setColor(Color.ORANGE);
-        //g.fillRect(targetPosition[1] * 30, targetPosition[0] * 30, GameEngine.TILE_SIZE, GameEngine.TILE_SIZE);
-       
         
-        /*if (this.currentMode.equals("scared")) {
-            g.drawImage(this.scaredImage[4], this.x, this.y, null);
-        }
-        else if (this.currentMode.equals("eaten")) {
-            g.drawImage(this.scaredImage[this.ghostImageIdx -1], this.x, this.y, null);
-        }
-        else {
-            g.drawImage(this.ghostImage[this.ghostImageIdx], this.x, this.y, null);
-        }*/
-        g.drawImage(this.ghostImage[this.ghostImageIdx], this.x, this.y, null);
         
-        //Rectangle gh = new Rectangle(this.x, this.y, 30, 30);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(this.hitbox);
+        
+      //  scaredImage[0] = new ImageIcon("images/Ghost/eyses_right.png").getImage();
+       // scaredImage[1] = new ImageIcon("images/Ghost/eyses_left.png").getImage();
+        //scaredImage[2] = new ImageIcon("images/Ghost/eyses_up.png").getImage();
+        //scaredImage[3] = new ImageIcon("images/Ghost/eyses_down.png").getImage();
+        //scaredImage[4] = new ImageIcon("images/Ghost/ghost_eaten.gif").getImage();
+        //scaredImage[5] = new ImageIcon("images/Ghost/ghost_vulnerable.gif").getImage();
+        
+        
+        
     }
     
     
-    
-    protected void findPath (Map map) {
-        //System.out.println("entrou path");
+    private void findPath (Map map) {
+        
         //instaciate the aux variables
         int [][] position = {{1,0},{0,-1},{0,1},{-1,0}};
         
@@ -147,8 +122,6 @@ public class Ghost extends Entity {
                 break;
             }
             
-            //System.out.println("passou do erro");
-            
             //check if find the target
             if (current.getY() == target.getY() && current.getX() == target.getX()) {
                 find = true;
@@ -160,7 +133,7 @@ public class Ghost extends Entity {
                 //check if the position is valid
                 if (current.getY() + position[i][0] >= 0 && current.getY() + position[i][0] < GameEngine.MAZE_SIZE_Y
                     && current.getX() + position[i][0] >= 0 && current.getX() + position[i][0] < GameEngine.MAZE_SIZE_X
-                    && map.screenData[pos] == 0 || map.screenData[pos] == 1 || map.screenData[pos] == 28) {
+                    && map.screenData[pos] == 0 || map.screenData[pos] == 63 || map.screenData[pos] == 64 || map.screenData[pos] == 55) {
                     
                     //creat a aux node that contain the next position
                     Node newNode = new Node(current.getY() + position[i][0],current.getX() + position[i][1]);                     
@@ -207,6 +180,7 @@ public class Ghost extends Entity {
             }
             
         }
+        
         //if the path is bigger thant 0, then the ghost is not stopped
         if (currentPath.length() > 0){
             //define the frist position of the path to real the next postion
@@ -230,19 +204,20 @@ public class Ghost extends Entity {
         else {
             this.direction = "none";
         }
-        //System.out.println("saiu path");    
+            
         
     }
     
     
-    protected void randomPosition (Map map,Pacman pacman,int max_y, int min_y, int max_x, int min_x) {
+    private void randomPosition (Map map,Pacman pacman,int max_y, int min_y, int max_x, int min_x) {
         int x, y;
             while (true) {
                 y = (int)((Math.random() * max_y - min_y) + min_y);
                 x = (int)((Math.random() * max_x - min_x) + min_x);
                 if (map.screenData[(y * GameEngine.TILE_SIZE) + x] == 0 
-                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 1
-                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 28)
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 64
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 63
+                   || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 55)
                     break;
             }
         
@@ -253,7 +228,7 @@ public class Ghost extends Entity {
         
     }
     
-    protected void justRun (Map map,Pacman pacman) {
+    private void justRun (Map map,Pacman pacman) {
         int x, y;
         
         while (true) {
@@ -264,8 +239,8 @@ public class Ghost extends Entity {
                               + Math.pow(pacman.getX()/ GameEngine.TILE_SIZE  - x, 2));
                     
             if ((map.screenData[(y * GameEngine.TILE_SIZE) + x] == 0 
-                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 1
-                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 28)
+                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 63
+                || map.screenData[(y * GameEngine.TILE_SIZE) + x] == 64)
                 && distance > 10) {
                 break;
             }
@@ -275,17 +250,19 @@ public class Ghost extends Entity {
         
     }
     
- 
+    public void chase (Map mpa, Pacman pacman){
+    }
     
-    public void updateMovement (Map map, Pacman pacman, int targetY, int targetX) {
-         
+    public void updateMovement (Map map, Pacman pacman) {
+        
         //check if the current position is valid to change
             if(this.x %GameEngine.TILE_SIZE == 0 && this.y % GameEngine.TILE_SIZE == 0){
                 this.velocity = 2;
                 //if in chase mode, go for the player
                 if (this.currentMode.equals("chaser")) {
-                    this.target_y = targetY;
-                    this.target_x = targetX;
+                    //this.target_y = pacman.getY() / GameEngine.TILE_SIZE;
+                    //this.target_x = pacman.getX() / GameEngine.TILE_SIZE;
+                    chase(map,pacman);
                     
                     
                    findPath(map);
@@ -316,13 +293,15 @@ public class Ghost extends Entity {
                 //mudanã
                 else if (this.currentMode.equals("eaten") && !map.isHome(this.y / GameEngine.TILE_SIZE, this.x / GameEngine.TILE_SIZE)) {
                     this.velocity = 5;
-                    for (int i = 0;i  < map.ghostHome.length; i++) {
-                        if (map.screenData[map.ghostHome[i][0] * GameEngine.TILE_SIZE + map.ghostHome[i][1]] == 0) {
-                            this.target_y = map.ghostHome[i][0];
-                            this.target_x = map.ghostHome[i][1];
-                        }
+                    if (map.screenData[map.ghostHome[0][0] * 30 + map.ghostHome[0][1]] == 0) {
+                        this.target_y = map.ghostHome[0][0];
+                        this.target_x = map.ghostHome[0][1];
                     }
-                        
+                    else if (map.screenData[map.ghostHome[1][0] * 30 + map.ghostHome[1][1]] == 0) {
+                        this.target_y = map.ghostHome[1][0];
+                        this.target_x = map.ghostHome[1][1];
+                    }
+                    
                     findPath(map);
                         
                 }else if (this.currentMode.equals("eaten") && !map.isHome(this.y / GameEngine.TILE_SIZE, this.x / GameEngine.TILE_SIZE)) {
@@ -371,7 +350,7 @@ public class Ghost extends Entity {
         //if it is, update the movement
         
         //System.out.println(this.direction);
-        //System.out.println(map.screenData[this.y /30 * this.x /30 + 30]);
+        
         switch (this.direction) {
                     case "up":
                         this.y-=velocity;
@@ -434,11 +413,10 @@ public class Ghost extends Entity {
               if(this.x%GameEngine.TILE_SIZE == 0 && this.y% GameEngine.TILE_SIZE ==0){
                   int pos = (this.x + (GameEngine.TILE_SIZE * this.dx)) /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)((this.y+ (GameEngine.TILE_SIZE * this.dy))/GameEngine.TILE_SIZE);
                   //se nao for valida, a posicao é nula
-                  if(map.screenData[pos] != 0 && map.screenData[pos] != 1 && map.screenData[pos] != 28)
+                  if(map.screenData[pos] != 0 && map.screenData[pos] != 63 && map.screenData[pos] != 64 && map.screenData[pos] != 55)
                     this.direction = "none";
               }
-         //upate the hitbox
-        this.hitbox = new Rectangle (this.x, this.y, GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);
+        this.hitbox = new Rectangle (this.x + 10, this.y + 10, GameEngine.TILE_SIZE - 20,GameEngine.TILE_SIZE - 20);
         
         
        /* if (pacman.getX() == this.x && pacman.getY() == this.y
@@ -451,11 +429,50 @@ public class Ghost extends Entity {
           || pacman.getX() + GameEngine.TILE_SIZE == this.x &&  pacman.getY() + GameEngine.TILE_SIZE == this.y
           )
            GameEngine.running = false;*/
-      // System.out.println("saiu update");
        
     }
     
-        //getters and setters
+    
+    
+    
+    @Override
+    public void render(Graphics g) {
+        g.setColor(Color.red);
+        //g.fillRect(this.x, this.y, GameEngine.TILE_SIZE, GameEngine.TILE_SIZE);
+        //g.setColor(Color.ORANGE);
+        //g.fillRect(targetPosition[1] * 30, targetPosition[0] * 30, GameEngine.TILE_SIZE, GameEngine.TILE_SIZE);
+       
+        
+        /*if (this.currentMode.equals("scared")) {
+            g.drawImage(this.scaredImage[4], this.x, this.y, null);
+        }
+        else if (this.currentMode.equals("eaten")) {
+            g.drawImage(this.scaredImage[this.ghostImageIdx -1], this.x, this.y, null);
+        }
+        else {
+            g.drawImage(this.ghostImage[this.ghostImageIdx], this.x, this.y, null);
+        }*/
+        g.drawImage(this.ghostImage[this.ghostImageIdx], this.x, this.y, null);
+        
+        //Rectangle gh = new Rectangle(this.x, this.y, 30, 30);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.draw(this.hitbox);
+    }
+   
+    
+    private boolean isHome (Map map) {
+        if (this.y / GameEngine.TILE_SIZE == map.ghostHome[0][0] && this.x / GameEngine.TILE_SIZE == map.ghostHome[0][1]
+           || this.y / GameEngine.TILE_SIZE == map.ghostHome[1][0] && this.x / GameEngine.TILE_SIZE == map.ghostHome[1][1]) {
+            //System.out.println("is home");
+            return true;
+            
+        }
+            
+        return false;
+    }
+    
+    
+    //getters and setters
 
     public int getTarget_x() {
         return target_x;
@@ -488,6 +505,6 @@ public class Ghost extends Entity {
     public void setCurrentMode(String currentMode) {
         this.currentMode = currentMode;
     }
-    
+ 
     
 }
