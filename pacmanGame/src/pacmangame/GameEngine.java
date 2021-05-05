@@ -63,7 +63,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener{
        //System.out.println((int)pacman.getY() + " " + (int)pacman.getX());
        
         pacman.updatePacMan(map);
-        map.updateMap(pacman.getX(), pacman.getY()); //update pills
+        map.updateMap(pacman.getX(), pacman.getY());
         
         //System.out.println(score);
         //map
