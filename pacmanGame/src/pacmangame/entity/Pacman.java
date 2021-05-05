@@ -15,7 +15,6 @@ public class Pacman extends Entity {
     Image [] pacmanImage;
     private int pacmanImageIdx; //idx of array of images
     
-    public int lives;
     
     //constructor
     public Pacman (int y, int x) {
@@ -28,7 +27,6 @@ public class Pacman extends Entity {
         this.pacmanImageIdx = 0;
         pacmanImage = new Image[6];
         
-        this.lives = 3;
         loadImages();
         
     }
@@ -48,8 +46,9 @@ public class Pacman extends Entity {
     public void updateMovement(Map map) {
         //verifica se a mudanca de direcao eh valida
       if(this.x %GameEngine.TILE_SIZE == 0 && this.y % GameEngine.TILE_SIZE == 0 && this.next_direction != this.direction){
-             int pos = (this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)((this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE);
-             //System.out.println(pos);
+             //int pos = (this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE + GameEngine.MAZE_SIZE_X * (int)((this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE);
+             int pos = (this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE * GameEngine.MAZE_SIZE_X + ((this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE);
+
              //System.out.println((map.isHome(((this.x + (GameEngine.TILE_SIZE * this.req_x)) /GameEngine.TILE_SIZE), ((this.y+ (GameEngine.TILE_SIZE * this.req_y))/GameEngine.TILE_SIZE))));
              if(map.screenData[pos] == 0 || map.screenData[pos]== 63 || map.screenData[pos] == 64) {
                    this.direction = this.next_direction;
@@ -99,7 +98,7 @@ public class Pacman extends Entity {
               }
               
           //update the hitbox    
-         this.hitbox = new Rectangle (this.x + 10, this.y + 10, GameEngine.TILE_SIZE - 20 ,GameEngine.TILE_SIZE - 20);
+         this.hitbox = new Rectangle (this.x + 5, this.y + 5, GameEngine.TILE_SIZE - 10 ,GameEngine.TILE_SIZE - 10);
               
     }
 
