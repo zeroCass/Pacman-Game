@@ -46,7 +46,7 @@ public class Map {
                     8,46,45,45,45,45,45,45,45,45,45,45,45,45,46,45,45,45,45,45,45,45,45,12,45,45,45,45,45, 4,
                     7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,21,19,20, 6, 6, 6, 6, 5,
                };
-                         
+
             screenData = new int [this.sizeX * this.sizeY];
             for(int i = 0; i < (this.sizeX * this.sizeY);i++) {
                 screenData[i] = map[i];
@@ -55,64 +55,62 @@ public class Map {
                     numPills++; //increase the number of pills
             }
             
-            loadMapImages();         
+            loadMapImages();  
     }
-       
+    
+    
     //this method load the image of map
     public void loadMapImages () {
-
         mapImages = new Image[47];
 	
-        mapImages[0] = new ImageIcon("images/mapa/00.jpg").getImage();
-	mapImages[1] = new ImageIcon("images/mapa/01.png").getImage();
-        mapImages[2] = new ImageIcon("images/mapa/02.png").getImage();
-        mapImages[3] = new ImageIcon("images/mapa/03.png").getImage();
-        mapImages[4] = new ImageIcon("images/mapa/04.png").getImage();
-        mapImages[5] = new ImageIcon("images/mapa/05.png").getImage();
-        mapImages[6] = new ImageIcon("images/mapa/06.png").getImage();
-        mapImages[7] = new ImageIcon("images/mapa/07.png").getImage();
-        mapImages[8] = new ImageIcon("images/mapa/08.png").getImage();
-        mapImages[9] = new ImageIcon("images/mapa/09.png").getImage();
-        mapImages[10] = new ImageIcon("images/mapa/10.png").getImage();
-        mapImages[11] = new ImageIcon("images/mapa/11.png").getImage();
-        mapImages[12] = new ImageIcon("images/mapa/12.png").getImage();
-        mapImages[13] = new ImageIcon("images/mapa/13.png").getImage();
-        mapImages[14] = new ImageIcon("images/mapa/14.png").getImage(); 
-        mapImages[15] = new ImageIcon("images/mapa/15.png").getImage();
-        mapImages[16] = new ImageIcon("images/mapa/16.png").getImage();
-        mapImages[17] = new ImageIcon("images/mapa/17.png").getImage();
-        mapImages[18] = new ImageIcon("images/mapa/18.png").getImage();
-        mapImages[19] = new ImageIcon("images/mapa/19.png").getImage();
-        mapImages[20] = new ImageIcon("images/mapa/20.png").getImage();
-        mapImages[21] = new ImageIcon("images/mapa/21.png").getImage();
-        mapImages[22] = new ImageIcon("images/mapa/22.png").getImage();
-        mapImages[23] = new ImageIcon("images/mapa/23.png").getImage();
-        mapImages[24] = new ImageIcon("images/mapa/24.png").getImage();
-        mapImages[25] = new ImageIcon("images/mapa/25.png").getImage();
-        mapImages[26] = new ImageIcon("images/mapa/26.png").getImage();
-        mapImages[27] = new ImageIcon("images/mapa/27.png").getImage();
-        mapImages[28] = new ImageIcon("images/mapa/28.png").getImage();
-        mapImages[29] = new ImageIcon("images/mapa/29.jpg").getImage(); 
-        mapImages[30] = new ImageIcon("images/mapa/30.png").getImage();
-        mapImages[31] = new ImageIcon("images/mapa/31.jpg").getImage();
-        mapImages[32] = new ImageIcon("images/mapa/32.png").getImage();
-        mapImages[33] = new ImageIcon("images/mapa/33.jpg").getImage();
-        mapImages[34] = new ImageIcon("images/mapa/34.jpg").getImage();
-        mapImages[35] = new ImageIcon("images/mapa/35.png").getImage();
-        mapImages[36] = new ImageIcon("images/mapa/36.png").getImage();
-        mapImages[37] = new ImageIcon("images/mapa/37.png").getImage();
-        mapImages[38] = new ImageIcon("images/mapa/38.png").getImage();
-        mapImages[39] = new ImageIcon("images/mapa/39.png").getImage();
-        mapImages[40] = new ImageIcon("images/mapa/40.png").getImage();
-        mapImages[41] = new ImageIcon("images/mapa/41.png").getImage();
-        mapImages[42] = new ImageIcon("images/mapa/42.png").getImage();
-        mapImages[43] = new ImageIcon("images/mapa/43.png").getImage();
-        mapImages[44] = new ImageIcon("images/mapa/44.png").getImage(); 
-        mapImages[45] = new ImageIcon("images/mapa/45.gif").getImage();
-        mapImages[46] = new ImageIcon("images/mapa/46.gif").getImage();  
+        mapImages[0] = new ImageIcon(getClass().getResource("/images/mapa/00.jpg")).getImage();
+	mapImages[1] = new ImageIcon(getClass().getResource("/images/mapa/01.png")).getImage();
+        mapImages[2] = new ImageIcon(getClass().getResource("/images/mapa/02.png")).getImage();
+        mapImages[3] = new ImageIcon(getClass().getResource("/images/mapa/03.png")).getImage();
+        mapImages[4] = new ImageIcon(getClass().getResource("/images/mapa/04.png")).getImage();
+        mapImages[5] = new ImageIcon(getClass().getResource("/images/mapa/05.png")).getImage();
+        mapImages[6] = new ImageIcon(getClass().getResource("/images/mapa/06.png")).getImage();
+        mapImages[7] = new ImageIcon(getClass().getResource("/images/mapa/07.png")).getImage();
+        mapImages[8] = new ImageIcon(getClass().getResource("/images/mapa/08.png")).getImage();
+        mapImages[9] = new ImageIcon(getClass().getResource("/images/mapa/09.png")).getImage();
+        mapImages[10] = new ImageIcon(getClass().getResource("/images/mapa/10.png")).getImage();
+        mapImages[11] = new ImageIcon(getClass().getResource("/images/mapa/11.png")).getImage();
+        mapImages[12] = new ImageIcon(getClass().getResource("/images/mapa/12.png")).getImage();
+        mapImages[13] = new ImageIcon(getClass().getResource("/images/mapa/13.png")).getImage();
+        mapImages[14] = new ImageIcon(getClass().getResource("/images/mapa/14.png")).getImage(); 
+        mapImages[15] = new ImageIcon(getClass().getResource("/images/mapa/15.png")).getImage();
+        mapImages[16] = new ImageIcon(getClass().getResource("/images/mapa/16.png")).getImage();
+        mapImages[17] = new ImageIcon(getClass().getResource("/images/mapa/17.png")).getImage();
+        mapImages[18] = new ImageIcon(getClass().getResource("/images/mapa/18.png")).getImage();
+        mapImages[19] = new ImageIcon(getClass().getResource("/images/mapa/19.png")).getImage();
+        mapImages[20] = new ImageIcon(getClass().getResource("/images/mapa/20.png")).getImage();
+        mapImages[21] = new ImageIcon(getClass().getResource("/images/mapa/21.png")).getImage();
+        mapImages[22] = new ImageIcon(getClass().getResource("/images/mapa/22.png")).getImage();
+        mapImages[23] = new ImageIcon(getClass().getResource("/images/mapa/23.png")).getImage();
+        mapImages[24] = new ImageIcon(getClass().getResource("/images/mapa/24.png")).getImage();
+        mapImages[25] = new ImageIcon(getClass().getResource("/images/mapa/25.png")).getImage();
+        mapImages[26] = new ImageIcon(getClass().getResource("/images/mapa/26.png")).getImage();
+        mapImages[27] = new ImageIcon(getClass().getResource("/images/mapa/27.png")).getImage();
+        mapImages[28] = new ImageIcon(getClass().getResource("/images/mapa/28.png")).getImage();
+        mapImages[29] = new ImageIcon(getClass().getResource("/images/mapa/29.jpg")).getImage(); 
+        mapImages[30] = new ImageIcon(getClass().getResource("/images/mapa/30.png")).getImage();
+        mapImages[31] = new ImageIcon(getClass().getResource("/images/mapa/31.jpg")).getImage();
+        mapImages[32] = new ImageIcon(getClass().getResource("/images/mapa/32.png")).getImage();
+        mapImages[33] = new ImageIcon(getClass().getResource("/images/mapa/33.jpg")).getImage();
+        mapImages[34] = new ImageIcon(getClass().getResource("/images/mapa/34.jpg")).getImage();
+        mapImages[35] = new ImageIcon(getClass().getResource("/images/mapa/35.png")).getImage();
+        mapImages[36] = new ImageIcon(getClass().getResource("/images/mapa/36.png")).getImage();
+        mapImages[37] = new ImageIcon(getClass().getResource("/images/mapa/37.png")).getImage();
+        mapImages[38] = new ImageIcon(getClass().getResource("/images/mapa/38.png")).getImage();
+        mapImages[39] = new ImageIcon(getClass().getResource("/images/mapa/39.png")).getImage();
+        mapImages[40] = new ImageIcon(getClass().getResource("/images/mapa/40.png")).getImage();
+        mapImages[41] = new ImageIcon(getClass().getResource("/images/mapa/41.png")).getImage();
+        mapImages[42] = new ImageIcon(getClass().getResource("/images/mapa/42.png")).getImage();
+        mapImages[43] = new ImageIcon(getClass().getResource("/images/mapa/43.png")).getImage();
+        mapImages[44] = new ImageIcon(getClass().getResource("/images/mapa/44.png")).getImage(); 
+        mapImages[45] = new ImageIcon(getClass().getResource("/images/mapa/45.gif")).getImage();
+        mapImages[46] = new ImageIcon(getClass().getResource("/images/mapa/46.gif")).getImage();   
     }
-    
-    
     
     public void drawMaze (Graphics g) {
         
@@ -149,6 +147,4 @@ public class Map {
                  
         return false;
     }
-    
-
 }

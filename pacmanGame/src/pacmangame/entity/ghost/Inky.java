@@ -17,11 +17,11 @@ public class Inky extends Ghost {
     
     //@Override
     private void loadImagesPrivate () {
-        ghostImage[0] = new ImageIcon("images/Ghost/Inky/inky_default.gif").getImage(); //stand by
-        ghostImage[1] = new ImageIcon("images/Ghost/Inky/inky_right.gif").getImage();
-        ghostImage[2] = new ImageIcon("images/Ghost/Inky/inky_left.gif").getImage();
-        ghostImage[3] = new ImageIcon("images/Ghost/Inky/inky_up.gif").getImage();
-        ghostImage[4] = new ImageIcon("images/Ghost/Inky/inky_down.gif").getImage();
+        ghostImage[0] = new ImageIcon(getClass().getResource("/images/Ghost/Inky/inky_default.gif")).getImage(); //stand by
+        ghostImage[1] = new ImageIcon(getClass().getResource("/images/Ghost/Inky/inky_right.gif")).getImage();
+        ghostImage[2] = new ImageIcon(getClass().getResource("/images/Ghost/Inky/inky_left.gif")).getImage();
+        ghostImage[3] = new ImageIcon(getClass().getResource("/images/Ghost/Inky/inky_up.gif")).getImage();
+        ghostImage[4] = new ImageIcon(getClass().getResource("/images/Ghost/Inky/inky_down.gif")).getImage();
     }
     
     @Override

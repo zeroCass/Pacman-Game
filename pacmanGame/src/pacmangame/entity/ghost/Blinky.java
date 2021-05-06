@@ -18,11 +18,11 @@ public class Blinky extends Ghost {
     
     private void loadImagesPrivate () {
         
-        ghostImage[0] = new ImageIcon("images/Ghost/Blinky/blinky_default.gif").getImage(); //stand by
-        ghostImage[1] = new ImageIcon("images/Ghost/Blinky/blinky_right.gif").getImage();
-        ghostImage[2] = new ImageIcon("images/Ghost/Blinky/blinky_left.gif").getImage();
-        ghostImage[3] = new ImageIcon("images/Ghost/Blinky/blinky_up.gif").getImage();
-        ghostImage[4] = new ImageIcon("images/Ghost/Blinky/blinky_down.gif").getImage();
+        ghostImage[0] = new ImageIcon(getClass().getResource("/images/Ghost/Blinky/blinky_default.gif")).getImage(); //stand by
+        ghostImage[1] = new ImageIcon(getClass().getResource("/images/Ghost/Blinky/blinky_right.gif")).getImage();
+        ghostImage[2] = new ImageIcon(getClass().getResource("/images/Ghost/Blinky/blinky_left.gif")).getImage();
+        ghostImage[3] = new ImageIcon(getClass().getResource("/images/Ghost/Blinky/blinky_up.gif")).getImage();
+        ghostImage[4] = new ImageIcon(getClass().getResource("/images/Ghost/Blinky/blinky_down.gif")).getImage();
     }
     
     @Override

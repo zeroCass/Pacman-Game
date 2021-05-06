@@ -37,13 +37,12 @@ public class Ghost extends Entity {
 
     @Override
     protected void loadImages() {     
-        ghostImage[5] = new ImageIcon("images/Ghost/eyes_right.gif").getImage();
-        ghostImage[6] = new ImageIcon("images/Ghost/eyes_left.gif").getImage();
-        ghostImage[7] = new ImageIcon("images/Ghost/eyes_up.gif").getImage();
-        ghostImage[8] = new ImageIcon("images/Ghost/eyes_down.gif").getImage();
-        ghostImage[9] = new ImageIcon("images/Ghost/ghost_eaten.gif").getImage();
-        ghostImage[10] = new ImageIcon("images/Ghost/ghost_vulnerable.gif").getImage();
-          
+        ghostImage[5] = new ImageIcon(getClass().getResource("/images/Ghost/eyes_right.gif")).getImage();
+        ghostImage[6] = new ImageIcon(getClass().getResource("/images/Ghost/eyes_left.gif")).getImage();
+        ghostImage[7] = new ImageIcon(getClass().getResource("/images/Ghost/eyes_up.gif")).getImage();
+        ghostImage[8] = new ImageIcon(getClass().getResource("/images/Ghost/eyes_down.gif")).getImage();
+        ghostImage[9] = new ImageIcon(getClass().getResource("/images/Ghost/ghost_eaten.gif")).getImage();
+        ghostImage[10] = new ImageIcon(getClass().getResource("/images/Ghost/ghost_vulnerable.gif")).getImage();        
     }
  
     private void findPath (Map map) {

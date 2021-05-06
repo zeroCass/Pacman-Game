@@ -4,6 +4,8 @@ package pacmangame;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -16,12 +18,13 @@ public class Sound {
     private int framePosition;
     
     //constructor that recieve a string that represent a path file of the song
-    public Sound (String soundFileName) {
+    public Sound (String soundName) {
         this.framePosition = 0; //init the song at literally of begin
         
         try {
-            File file = new File(soundFileName);
-            AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+            //File file = new File(soundFileName);
+            InputStream is = getClass().getResourceAsStream(soundName);
+            AudioInputStream sound = AudioSystem.getAudioInputStream(is);
             this.clip = AudioSystem.getClip();
             this.clip.open(sound);
         }

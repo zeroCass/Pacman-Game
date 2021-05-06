@@ -4,6 +4,10 @@ package pacmangame.entity;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import pacmangame.GameEngine;
 import pacmangame.Map;
@@ -33,13 +37,14 @@ public class Pacman extends Entity {
     
     @Override
     protected void loadImages() {
-        pacmanImage[0] = new ImageIcon("images/pacman/pacman.gif").getImage(); //stand by
-        pacmanImage[1] = new ImageIcon("images/pacman/pacman_dying.gif").getImage();
-        pacmanImage[2] = new ImageIcon("images/pacman/pacman_right.gif").getImage();
-        pacmanImage[3] = new ImageIcon("images/pacman/pacman_left.gif").getImage();
-        pacmanImage[4] = new ImageIcon("images/pacman/pacman_up.gif").getImage();
-        pacmanImage[5] = new ImageIcon("images/pacman/pacman_down.gif").getImage();
-        pacmanImage[6] = new ImageIcon("images/pacman/pacman_dead.gif").getImage();
+        pacmanImage[0] = new ImageIcon(getClass().getResource("/images/pacman/pacman.gif")).getImage();
+        pacmanImage[0] = new ImageIcon(getClass().getResource("/images/pacman/pacman.gif")).getImage(); //stand by
+        //pacmanImage[1] = new ImageIcon(getClass().getResource("/images/pacman/pacman_dying.gif")).getImage();
+        pacmanImage[2] = new ImageIcon(getClass().getResource("/images/pacman/pacman_right.gif")).getImage();
+        pacmanImage[3] = new ImageIcon(getClass().getResource("/images/pacman/pacman_left.gif")).getImage();
+        pacmanImage[4] = new ImageIcon(getClass().getResource("/images/pacman/pacman_up.gif")).getImage();
+        pacmanImage[5] = new ImageIcon(getClass().getResource("/images/pacman/pacman_down.gif")).getImage();
+        pacmanImage[6] = new ImageIcon(getClass().getResource("/images/pacman/pacman_dead.gif")).getImage();
     }
  
     public void updateMovement(Map map) {

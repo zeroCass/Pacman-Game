@@ -1,7 +1,6 @@
 
 package pacmangame.entity.ghost;
 
-import pacmangame.entity.ghost.Ghost;
 import javax.swing.ImageIcon;
 import pacmangame.GameEngine;
 import pacmangame.Map;
@@ -16,11 +15,11 @@ public class Pinky extends Ghost {
     }
     
         private void loadImagesPrivate () {
-        ghostImage[0] = new ImageIcon("images/Ghost/Pinky/pinky_default.gif").getImage(); //stand by
-        ghostImage[1] = new ImageIcon("images/Ghost/Pinky/pinky_right.gif").getImage();
-        ghostImage[2] = new ImageIcon("images/Ghost/Pinky/pinky_left.gif").getImage();
-        ghostImage[3] = new ImageIcon("images/Ghost/Pinky/pinky_up.gif").getImage();
-        ghostImage[4] = new ImageIcon("images/Ghost/Pinky/pinky_down.gif").getImage();
+        ghostImage[0] = new ImageIcon(getClass().getResource("/images/Ghost/Pinky/pinky_default.gif")).getImage(); //stand by
+        ghostImage[1] = new ImageIcon(getClass().getResource("/images/Ghost/Pinky/pinky_right.gif")).getImage();
+        ghostImage[2] = new ImageIcon(getClass().getResource("/images/Ghost/Pinky/pinky_left.gif")).getImage();
+        ghostImage[3] = new ImageIcon(getClass().getResource("/images/Ghost/Pinky/pinky_up.gif")).getImage();
+        ghostImage[4] = new ImageIcon(getClass().getResource("/images/Ghost/Pinky/pinky_down.gif")).getImage();
     }
     
     @Override
