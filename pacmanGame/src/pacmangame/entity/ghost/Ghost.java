@@ -172,8 +172,8 @@ public class Ghost extends Entity {
                 nextY = (int)((Math.random() * max_y - min_y) + min_y);
                 nextX = (int)((Math.random() * max_x - min_x) + min_x);
                 if (map.screenData[(nextY * GameEngine.TILE_SIZE) + nextX] == 0 
-                   || map.screenData[(nextY * GameEngine.TILE_SIZE) + nextX] == 46
                    || map.screenData[(nextY * GameEngine.TILE_SIZE) + nextX] == 45
+                   || map.screenData[(nextY * GameEngine.TILE_SIZE) + nextX] == 46
                    || map.screenData[(nextY * GameEngine.TILE_SIZE) + nextX] == 37)
                     find = true;
             }

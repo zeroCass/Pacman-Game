@@ -46,7 +46,10 @@ public class Map {
                     8,46,45,45,45,45,45,45,45,45,45,45,45,45,46,45,45,45,45,45,45,45,45,12,45,45,45,45,45, 4,
                     7, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,21,19,20, 6, 6, 6, 6, 5,
                };
-
+               
+           
+           
+           
             screenData = new int [this.sizeX * this.sizeY];
             for(int i = 0; i < (this.sizeX * this.sizeY);i++) {
                 screenData[i] = map[i];
@@ -55,12 +58,14 @@ public class Map {
                     numPills++; //increase the number of pills
             }
             
-            loadMapImages();  
+            loadMapImages();
+            
     }
     
     
     //this method load the image of map
     public void loadMapImages () {
+
         mapImages = new Image[47];
 	
         mapImages[0] = new ImageIcon(getClass().getResource("/images/mapa/00.jpg")).getImage();
@@ -109,8 +114,12 @@ public class Map {
         mapImages[43] = new ImageIcon(getClass().getResource("/images/mapa/43.png")).getImage();
         mapImages[44] = new ImageIcon(getClass().getResource("/images/mapa/44.png")).getImage(); 
         mapImages[45] = new ImageIcon(getClass().getResource("/images/mapa/45.gif")).getImage();
-        mapImages[46] = new ImageIcon(getClass().getResource("/images/mapa/46.gif")).getImage();   
+        mapImages[46] = new ImageIcon(getClass().getResource("/images/mapa/46.gif")).getImage();  
+               
+        
     }
+    
+    
     
     public void drawMaze (Graphics g) {
         
@@ -147,4 +156,6 @@ public class Map {
                  
         return false;
     }
+    
+
 }

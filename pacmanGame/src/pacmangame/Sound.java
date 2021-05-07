@@ -18,13 +18,13 @@ public class Sound {
     private int framePosition;
     
     //constructor that recieve a string that represent a path file of the song
-    public Sound (String soundName) {
+    public Sound (URL soundName) {
         this.framePosition = 0; //init the song at literally of begin
         
         try {
             //File file = new File(soundFileName);
-            InputStream is = getClass().getResourceAsStream(soundName);
-            AudioInputStream sound = AudioSystem.getAudioInputStream(is);
+            //InputStream is = getClass().getResourceAsStream(soundName);
+            AudioInputStream sound = AudioSystem.getAudioInputStream(soundName);
             this.clip = AudioSystem.getClip();
             this.clip.open(sound);
         }
