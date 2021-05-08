@@ -205,6 +205,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         int miliseconds = 3000;
         if (winner) {
             miliseconds = 7000;
+            this.soundWin.play();
         }
             
         while (newTimer - timer < miliseconds) { 
@@ -250,8 +251,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //win condition
         if (map.numPills == 0) {
             winner = true;
-            //System.out.println("entrou yin condition");
-            this.soundWin.play();
             gameOver();
         }
                        
@@ -452,8 +451,8 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                         ateGhost = 0;
                      //reset the state of ghost of scared to the previus state
                     }else if (scaredTimer == 10000 && ghostMode.equals("scared")) {
-                        //this.soundInterdimension.stop();
-                        //this.soundMainMusic.loop();
+                        this.soundInterdimension.stop();
+                        this.soundMainMusic.loop();
                         
                         scaredTimer = 0;
                         ghostMode = oldGhostMode;
@@ -472,7 +471,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                     }
                 }
             }else {
-                //this.soundInterdimension.stop();
+                this.soundInterdimension.stop();
                 //wait 1 second when pacman eats
                 waitUntilDone(1000, false);
                 
@@ -529,6 +528,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             ateGhost = 0;
             this.soundSuperPill.play();
             this.soundMainMusic.stop();
+            this.soundInterdimension.stop(); //in case its already ´playing
             this.soundInterdimension.play();
             map.numPills--; //decrease number os pills remaning
             
