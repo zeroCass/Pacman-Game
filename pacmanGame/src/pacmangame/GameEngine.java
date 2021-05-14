@@ -28,6 +28,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import pacman_menu.save_score;
 import pacmangame.entity.Blinky;
 import pacmangame.entity.Clyde;
 import pacmangame.entity.Inky;
@@ -83,9 +84,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     private Ghost [] ghosts;
     private Image pacman_live;
     private Image [] ghostPoints;
-    
-    
-    
+     
     public GameEngine () {
         
        /* try {
@@ -115,7 +114,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         this.setFocusable(true);
         addKeyListener(this);
     }
-    
     
     public synchronized void start () {
         
@@ -188,10 +186,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
         
     }
-    
 
-    
-    
     //this check restart or game over
     public synchronized void restart () {
         
@@ -249,7 +244,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
     }
     
-    
     public synchronized void stop () {
         if (!running)return;
         running = false;
@@ -264,7 +258,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
     }
     
-    
     private void gameOver () {
         running = false;
         this.sound_main_music.stop();
@@ -275,7 +268,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             miliseconds = 7000;
         }
             
-        
         while (newTimer - timer < miliseconds) { 
             render();
             newTimer = System.currentTimeMillis();
@@ -285,10 +277,11 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //new ranking().setVisible(true);
         //System.out.println("stop");
         //this.setVisible(false);  /!!!!!! This LINE IS IMPORTANT
+                   
         stop();
+        new save_score().setVisible(true);
 
     }
-    
     
     //this method is responsable to pause the game for x miliseconds
     public synchronized void waitUntilDone(int miliseconds, boolean isOver) {
@@ -316,8 +309,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
          }
   
     } 
-    
-    
+       
     private void update () {
         pacman.updateMovement(map); //move the pacman
         checkPills(pacman.getY(), pacman.getX()); //check if the players got the pill
@@ -391,8 +383,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         }
         
     }
-    
-  
     
     private void render () {    
         //creat the buffer (graphics)
@@ -475,7 +465,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //buffer.show();
     }
     
-//the gameLoop
+    //the gameLoop
     @Override
     public void run() {
         //variables for controls ghost respawn
@@ -620,7 +610,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             
     }
     
-    
      //check if the postiion of the pacman is a pill
     public void checkPills(int y, int x) {
         //normal pill
@@ -635,6 +624,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         else if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 64) {
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             this.score+=50;
+            ateGhost = 0;
             //this.ate_pill.play();
             this.sound_superPill.play();
             this.sound_main_music.stop();
@@ -655,16 +645,12 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
        //System.out.println("Pontos :" + score); 
         
     }
-    
-    
-    
+
     //never used
     @Override
     public void keyTyped(KeyEvent e) {
         
     }
-    
-    
     
     @Override
     public void keyPressed(KeyEvent e) {
