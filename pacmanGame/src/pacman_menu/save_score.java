@@ -13,6 +13,7 @@ public class save_score extends javax.swing.JFrame {
     private final boolean attach = true; 
     public save_score() {
         //menu.Game.setVisible(false);
+        this.setResizable(false);
         menu.Game.dispose();
         initComponents();
         background2.setVisible(false); //set invisible this jpanel 
@@ -204,21 +205,22 @@ public class save_score extends javax.swing.JFrame {
 
     private void save_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonActionPerformed
         String nickname = setNickname.getText(); //receceives the player's nickname
-        String score = Integer.toString(GameEngine.score); //and your score (//add getter in game engine code)     
+        String score = Integer.toString(GameEngine.score); //and your score (//add getter in game engine code)
         File directory = new File("ranking/ranking.txt"); //define the directory
-        
+        directory.setWritable(true); //allows writing the writing of the file
+
         try {
             FileOutputStream output = new FileOutputStream(directory, attach); //if true add new text at the end of the file
             BufferedWriter bw = new BufferedWriter(
                     new OutputStreamWriter(output));
-            
-                    String playerScores = nickname + "_" + score + "\n"; //now has nickname and score in a single String, both are separated by "_"
-                    bw.write(playerScores);
-                    bw.close();
+                    String playerScores = nickname + "_" + score + "\n"; //now has nickname and score in a single String, both are separated by ""
+                    bw.write(playerScores); //write "playerScores" data to the file
+                    bw.close(); 
         } catch (IOException ex) {
             Logger.getLogger(save_score.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        directory.setReadOnly(); //sets the file to read-only mode
         this.setVisible(false);
         new menu().setVisible(true); //now go back to menu
     }//GEN-LAST:event_save_buttonActionPerformed

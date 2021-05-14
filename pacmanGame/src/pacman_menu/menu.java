@@ -14,7 +14,9 @@ public class menu extends javax.swing.JFrame {
     
     public menu(){
         initComponents();
+        this.setResizable(false);
         this.menu_music = new Sound("music/menu_music.wav");
+        this.menu_music.setVolume(0.25);
         this.menu_music.loop();
         
         this.Game = new JFrame();
@@ -197,7 +199,6 @@ public class menu extends javax.swing.JFrame {
         this.setVisible(false);
         this.Game.setVisible(true);
         this.gameEngine.start();
-
     }//GEN-LAST:event_start_buttonActionPerformed
 
     private void controls_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controls_buttonActionPerformed
@@ -240,7 +241,9 @@ public class menu extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() { 
-                new menu().setVisible(true);    
+                new menu().setVisible(true);
+                
+               
             }
         });
     }

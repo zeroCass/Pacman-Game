@@ -15,6 +15,7 @@ public class ranking extends javax.swing.JFrame {
         nicknames = new ArrayList();
         scores = new ArrayList();
         initComponents();
+        this.setResizable(false);
         
         try{
             File directory = new File("ranking/ranking.txt"); //define the directory

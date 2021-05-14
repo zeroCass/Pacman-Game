@@ -1,39 +1,19 @@
 package pacmangame;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.Canvas;
 import java.awt.event.KeyListener;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.*;
-import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferStrategy;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import java.io.IOException;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 import pacman_menu.save_score;
 import pacmangame.entity.Blinky;
 import pacmangame.entity.Clyde;
 import pacmangame.entity.Inky;
 import pacmangame.entity.Ghost;
-import pacmangame.entity.GhostRed;
 import pacmangame.entity.Pacman;
 import pacmangame.entity.Pinky;
 
@@ -43,23 +23,19 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     public static final int TILE_SIZE = 30; //size in pixels of each object in game
     public static final int MAZE_SIZE_Y = 20;
     public static final int MAZE_SIZE_X = 30;
-    public static int timerEvent;
-    public static int scaredTimer;
+    public static int timerEvent; //counter that chenge ghosts mode
+    public static int scaredTimer; //counter that turn on/off the scared ghost mdoe
+     public static boolean pauseTimer = false; //pause gameloop after eaten a ghost
     public static String ghostMode; //scatter,chaser,scared, eaten
     public static String oldGhostMode; //keep the old mode
     public static int score;
-    public static int ateGhost;
-    private int eatenGhostIdx;
+    public static int ateGhost; //variable responsible for accumulating points when eating ghost 
+    private int eatenGhostIdx; //varibale that save that current eaten ghost
     private boolean winner;
-    //private boolean death;
-    
+    public static int lives;
     //the main thread of this object
     public static Thread thread;
     public static boolean running = false; //the main variable the makes game loop running
-    
-    //AudioClip death;
-    AudioClip ready_song;
-    AudioClip music_game, ate_pill;
     
     Sound sound_death;
     Sound sound_pill;
@@ -70,13 +46,9 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     Sound sound_interdimension;
     Sound sound_win;
     
-    private Font PAC_FONT;
+    private Font PAC_FONT; //inused 
     
-    //define if the update/draw is going on
-    public static boolean pauseTimer = false; 
-    
-    public static int lives;
-    
+  
     //objects
     private Pacman pacman;
     private Map map;
@@ -86,41 +58,37 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     private Image [] ghostPoints;
      
     public GameEngine () {
-        
-       /* try {
-           
-            File file = new File ("music/pacman_death.wav");
-            URL url = file.toURI().toURL();
-            this.death = Applet.newAudioClip(url);
-            
-            url = getClass().getResource("intro.wav");
-            this.ready_song = Applet.newAudioClip(url);
-            
-            //url = getClass().getResource("training.wav");
-            //this.music_game = Applet.newAudioClip(url);
-            
-            
-            url = getClass().getResource("ate_pellot.wav");
-            this.ate_pill = Applet.newAudioClip(url);
-            
-        }catch (MalformedURLException e) {
-            
-        }*/
-        
-        
-        
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT + 50));
         this.setBackground(Color.BLACK);
         this.setFocusable(true);
         addKeyListener(this);
     }
     
-    public synchronized void start () {
+    private void init_objects() {
+        //init the variables and objects
+        pacman = new Pacman(14, 14); //!! the fisrt position !!
+        ghosts = new Ghost[4];
+        Blinky blinky = new Blinky(7,14);
+        ghosts[0] = blinky;
         
+        Pinky pinky = new Pinky(9,14);
+        ghosts[1] = pinky;
         
+        Inky inky = new Inky(9,13);
+        ghosts[2] = inky;
         
+        Clyde clyde = new Clyde(9,15);
+        ghosts[3] = clyde;
         
-        this.pacman_live = new ImageIcon("images/pacman/pacman_left.gif").getImage();
+        //init variables
+        ghostMode = "scatter"; //the initial ghost mode
+        timerEvent = 0;
+        scaredTimer = 0;
+        winner = false;
+        pauseTimer = false;
+    }
+    
+    private void init_sound () {
         this.sound_death = new Sound("soundfx/pacman_death.wav");
         this.sound_main_music = new Sound("music/main.wav");
         this.sound_intro = new Sound("soundfx/intro_2.wav");
@@ -129,51 +97,51 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         this.sound_ate_ghost = new Sound("soundfx/ate_ghost.wav");
         this.sound_win = new Sound("soundfx/win.wav");
         this.sound_interdimension = new Sound("music/interdimension.wav");
-        
-        
-        //init the variables and objects
-        pacman = new Pacman(14, 14); //!! the fisrt position !!
-        //init all ghosts
-        //ghosts = new ArrayList();
-        ghosts = new Ghost[4];
-        Blinky blinky = new Blinky(7,14);
-        //ghosts.add(blinky);
-        ghosts[0] = blinky;
-        
-        Pinky pinky = new Pinky(9,14);
-        //ghosts.add(pinky);
-        ghosts[1] = pinky;
-        
-        Inky inky = new Inky(9,13);
-        //ghosts.add(inky);
-        ghosts[2] = inky;
-        
-        Clyde clyde = new Clyde(9,15);
-        //ghosts.add(clyde);
-        ghosts[3] = clyde;
-        
-        
-        map = new Map(); //intanciate the map
-        ghostMode = "scatter"; //the initial ghost mode
-        score = 0;
-        timerEvent = 0;
-        scaredTimer = 0;
-        lives = 3;
-        winner = false;
-        //death = false;
-        pauseTimer = false;
+    }
+    
+    private void init_images () {
         ghostPoints = new Image [4];
+        pacman_live = new ImageIcon("images/pacman/pacman_left.gif").getImage();
         ghostPoints[0] = new ImageIcon("images/GameStates/200pts.png").getImage();
         ghostPoints[1] = new ImageIcon("images/GameStates/400pts.png").getImage();
         ghostPoints[2] = new ImageIcon("images/GameStates/800pts.png").getImage();
         ghostPoints[3] = new ImageIcon("images/GameStates/1600pts.png").getImage();
-        
+        //init font
+        try {
+            PAC_FONT = Font.createFont(Font.TRUETYPE_FONT, new File("font/8-bit Arcade In.ttf")).deriveFont(35f);
+            //PAC_FONT.deriveFont(100f);
+        }catch (IOException | FontFormatException e) {
+            System.out.println("Erro na fonte");
+        }
+    }
+    
+    private void close_sound () {
+        this.sound_death.close();
+        this.sound_main_music.close();
+        this.sound_intro.close();
+        this.sound_pill.close();
+        this.sound_superPill.close();
+        this.sound_ate_ghost.close();
+        this.sound_win.close();
+        this.sound_interdimension.close();
+    }
+    
+    public synchronized void start () { 
+        map = new Map(); //intanciate the map
+        lives = 3;
+        score = 0;
+          
+        init_objects();
+        init_images();
+        init_sound();
+
         
         this.sound_intro.play(); //intro music play
+        //wait for 4sec until intro music play
         long timer = System.currentTimeMillis();
         long newTimer = timer;
         while (newTimer - timer < 4000) { 
-            render();
+            render();//show the ready msg
             newTimer = System.currentTimeMillis();
         }
         
@@ -186,7 +154,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
         
     }
-
+    
     //this check restart or game over
     public synchronized void restart () {
         
@@ -194,73 +162,44 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //if the live is bigger than 0, restart the game
         if (lives > 0) {
           //init the variables and objects
-            pacman = new Pacman(14, 14); //!! the fisrt position !!
-            
-            //init all ghosts
-            //ghosts = new ArrayList();
-            ghosts = new Ghost[4];
-            Blinky blinky = new Blinky(7,14);
-            //ghosts.add(blinky);
-            ghosts[0] = blinky;
-
-            Pinky pinky = new Pinky(9,14);
-            //ghosts.add(pinky);
-            ghosts[1] = pinky;
-
-            Inky inky = new Inky(9,13);
-            //ghosts.add(inky);
-            ghosts[2] = inky;
-
-            Clyde clyde = new Clyde(9,15);
-            //ghosts.add(clyde);
-            ghosts[3] = clyde;
-
-            ghostMode = "scatter"; //the initial ghost mode
-            timerEvent = 0;
-            //death = false;
-            scaredTimer = 0;
-            pauseTimer = false;
-            
+            init_objects();
+            //wait 1 sec 
             long timer = System.currentTimeMillis();
             long newTimer = timer;
             while (newTimer - timer < 1000) { 
-                render();
+                render();//show the ready msg
                 newTimer = System.currentTimeMillis();
             }
            
-            //this.sound_intro.play(); //intro music play
-            this.sound_main_music.loop();
+            this.sound_main_music.loop(); //plays the main music
             if (running)return;
              running = true;
              run();
-             //thread = new Thread(this);
-             //thread.start();  
-         }else {
+         }
+        else {
              running = false;
              gameOver();
-             stop();
          }
         
         
     }
-    
+      
+    //stop the thread (and open the next jframe)
     public synchronized void stop () {
-        if (!running)return;
+        new save_score().setVisible(true);
         running = false;
         try {
             thread.join();
-            //new ranking().setVisible(true);
         }
         catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return;
-        
+        }   
     }
     
+    //shutdown the gameloop and variables
+    //game its over, win or lose
     private void gameOver () {
         running = false;
-        this.sound_main_music.stop();
+        this.sound_main_music.stop(); //stop the main music
         long timer = System.currentTimeMillis();
         long newTimer = timer;
         int miliseconds = 3000;
@@ -269,18 +208,12 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         }
             
         while (newTimer - timer < miliseconds) { 
-            render();
+            render(); //
             newTimer = System.currentTimeMillis();
         }
         
-        this.sound_main_music.close();
-        //new ranking().setVisible(true);
-        //System.out.println("stop");
-        //this.setVisible(false);  /!!!!!! This LINE IS IMPORTANT
-                   
+        close_sound(); //close all sounds of the game               
         stop();
-        new save_score().setVisible(true);
-
     }
     
     //this method is responsable to pause the game for x miliseconds
@@ -309,7 +242,8 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
          }
   
     } 
-       
+     
+    //update all the engine stuffs, check gameover, collisions, update movement...
     private void update () {
         pacman.updateMovement(map); //move the pacman
         checkPills(pacman.getY(), pacman.getX()); //check if the players got the pill
@@ -320,10 +254,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             this.sound_win.play();
             gameOver();
         }
-            
-            //System.out.println("Winner");
-        
-        
+                       
         //update movement and check colisions
         for (int i = 0; i < ghosts.length; i++) {
             ghosts[i].updateMovement(map, pacman);
@@ -348,7 +279,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             //check gameOver in scared Mode
                 else if (ghosts[i].hitbox.intersects(pacman.hitbox) 
                    && !ghosts[i].getCurrentMode().equals("eaten") && !ghosts[i].getCurrentMode().equals("scared")) {
-                    //death.play();
                     this.sound_main_music.stop();
                     this.sound_interdimension.stop();
                     waitUntilDone(1000, true);
@@ -357,9 +287,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                     pacman.setIsDead(true);
                     waitUntilDone(4000, true);
                    
-                    System.out.println("GameOver in Scared");
-                    //pauseTimer = true;
-                    //waitUntilDone(4000, false);
+                    //System.out.println("GameOver in Scared");
                     lives--;
                     
                     restart();
@@ -367,10 +295,8 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             }
             //if the current is not scared, then the colision is GameOver
             else if ((ghosts[i].hitbox.intersects(pacman.hitbox) || ghosts[i].hitbox.intersects(pacman.hitbox))) {
-                //death.play();
-                System.out.println("entrou");
-                System.out.println("GameOver in Scatter or Chase");
-                //pauseTimer = true;
+                //System.out.println("entrou");
+                //System.out.println("GameOver in Scatter or Chase");
                 this.sound_main_music.stop();
                 waitUntilDone(1000, true);
                 this.sound_death.play();
@@ -384,6 +310,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
     }
     
+    //render all graphical objects on the screen
     private void render () {    
         //creat the buffer (graphics)
         BufferStrategy buffer = this.getBufferStrategy();
@@ -395,12 +322,9 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         
         //draw the Objects
         map.drawMaze(g); //draw the game Maze
-        //pacman.render(g); //draw the Pacman
         drawScore(g);
-        
 
-        
-        //drtaw the points at eat a ghost
+        //draw the points at eat a ghost
         if (pauseTimer && !running) {
             //make sure that will never acess a invalid position
             if (ateGhost > 3)
@@ -422,15 +346,14 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                 
             }
         }
+        //render the win screen
         else if (!running && lives > 0 && !pauseTimer && !pacman.isDead() && winner){  
-            System.out.println("you win");
             Image youwin;
             youwin = new ImageIcon("images/GameStates/youwin.png").getImage();
             g.drawImage(youwin, 360, 335, null);
         }
         //if is not running, then it is in screen start or gameOver
         else if (!running && lives > 0 && !pauseTimer && !pacman.isDead()){
-           
             //draw the ready intro
             Image ready;
             ready = new ImageIcon("images/GameStates/ready.png").getImage();
@@ -438,13 +361,13 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             //g.drawString("Read!", 420, 350);
             //play the start music
         }
+        //game over screen
         else if (!running && lives == 0) {
             Image gameover;
             gameover = new ImageIcon("images/GameStates/gameover.png").getImage();
             g.drawImage(gameover, 365, 335, null);
         }
         
-
         //redraw and show the graphcis
         g.dispose();
         buffer.show();
@@ -452,17 +375,14 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     
     private void drawScore (Graphics g) {
         g.setColor(Color.black);
-        g.fillRect(0, 600, 900, 50);
+        g.fillRect(0, 600, 900, 50); //RE_draw the backgroud of the score
         for (int i = 0; i < lives; i++) {
-            g.drawImage(pacman_live, 860 - (i * 40), 610, null);
-            //g.setColor(Color.YELLOW);
-            //g.drawRect(860 - (i * 40), 610, 30, 30);
+            g.drawImage(pacman_live, 860 - (i * 40), 610, null); //draw the lives
         }
         g.setColor(Color.white);
-        g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString(String.valueOf(score), 30, 625);
-        //g.dispose();
-        //buffer.show();
+        //g.setFont(new Font("Arial", Font.PLAIN, 20));
+        g.setFont(PAC_FONT);
+        g.drawString(String.valueOf(score), 40, 625);
     }
     
     //the gameLoop
@@ -470,7 +390,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     public void run() {
         //variables for controls ghost respawn
         int respawnTimer = 0;
-        int idxRespawn = 1;
+        int idxRespawn = 1; //start at 1, cause red ghost begin out of the house
         //variable for constrols gameloop and updates/renders
         this.requestFocus();
         int fps = 0; 
@@ -480,12 +400,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         double delta = 0;
         double ns = 1000000000 / targetFPS;
         
-        //start screen - READY!
-        //waitUntilDone(5000, false);
-        //this.sound_musicGame.play();
-        //this.sound_musicGame.loop();
         while (running) {
-            
             if (!pauseTimer) {
                 long currentTime = System.nanoTime();
                 delta+= (currentTime - lastTime) / ns;
@@ -527,7 +442,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                         timerEvent+=1000;
                     }
 
-
                     //if passed 10 sec, change the current mode scatter
                     if (timerEvent == 10000 && ghostMode.equals("scatter")) {
                         //System.out.println(timerEvent);
@@ -560,22 +474,11 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
                         }
 
                     }
-                    //System.out.println(ghostMode);
-                    //System.out.println(scaredTimer / 1000);
                 }
             }else {
                 this.sound_interdimension.stop();
                 //wait 1 second when pacman eats
                 waitUntilDone(1000, false);
-                /*running = false;
-                long pause = System.currentTimeMillis();
-                long newTimer = pause;
-                while (newTimer - timer < 1000) { 
-                    newTimer = System.currentTimeMillis();
-                }
-                System.out.println("passa ?");
-                this.sound_interdimension.resume();
-                pauseTimer = false;*/
                 
             }
             
@@ -616,7 +519,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 63){
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             this.score+=10;
-            //this.ate_pill.play();
             this.sound_pill.play();
             map.numPills--; //decrease number os pills remaning
         }
@@ -625,11 +527,11 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             this.score+=50;
             ateGhost = 0;
-            //this.ate_pill.play();
             this.sound_superPill.play();
             this.sound_main_music.stop();
             this.sound_interdimension.play();
             map.numPills--; //decrease number os pills remaning
+            
             //change the current Mode to SCARED
             scaredTimer = 0;
             if (!ghostMode.equals("scared"))
@@ -639,10 +541,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
             for (int i = 0; i < ghosts.length; i++) {
                 ghosts[i].setCurrentMode("scared");
             } 
-        }
-        
-        //System.out.println(map.numPills);
-       //System.out.println("Pontos :" + score); 
+        }       
         
     }
 
@@ -651,7 +550,8 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     public void keyTyped(KeyEvent e) {
         
     }
-    
+   
+    //method that controls the keyevent of keyboard and change pacman direction
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();

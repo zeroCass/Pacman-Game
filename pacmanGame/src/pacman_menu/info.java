@@ -4,6 +4,7 @@ public class info extends javax.swing.JFrame {
 
     public info() {
         initComponents();
+        this.setResizable(false);
     }
 
     @SuppressWarnings("unchecked")

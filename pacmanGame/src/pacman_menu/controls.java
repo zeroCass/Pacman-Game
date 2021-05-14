@@ -3,6 +3,7 @@ package pacman_menu;
 public class controls extends javax.swing.JFrame {
     public controls() {
         initComponents();
+        this.setResizable(false);
         //W/D/S/A
         show_up.setEnabled(false);
         show_right.setEnabled(false);
