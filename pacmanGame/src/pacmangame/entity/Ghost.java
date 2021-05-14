@@ -17,6 +17,7 @@ public class Ghost extends Entity {
     protected int ghostImageIdx;
     protected int target_x, target_y;//define wich the current target
     protected String currentMode; //scatter,chaser,scared, eaten
+    protected boolean canOut;
    
     //constructor
     public Ghost (int y, int x) {
@@ -24,11 +25,10 @@ public class Ghost extends Entity {
         this.x = x * GameEngine.TILE_SIZE;   
         this.velocity = 2;
         this.direction = "none";
-        this.next_direction = "none";
-        
+        this.next_direction = "none"; 
         ghostImage = new Image[11];
         ghostImageIdx = 0;
-        
+        this.canOut = false;
         this.hitbox = new Rectangle(this.x, this.y, GameEngine.TILE_SIZE,GameEngine.TILE_SIZE);     
         this.currentMode = "scatter";
         
@@ -214,6 +214,9 @@ public class Ghost extends Entity {
     }
     
     public void updateMovement (Map map, Pacman pacman) {
+        //if is in home and cant move
+        if (!this.canOut)
+            return;
         
         //check if the current position is valid to change
             if(this.x %GameEngine.TILE_SIZE == 0 && this.y % GameEngine.TILE_SIZE == 0){
@@ -360,7 +363,7 @@ public class Ghost extends Entity {
         
         //Rectangle gh = new Rectangle(this.x, this.y, 30, 30);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.draw(this.hitbox);
+        //g2d.draw(this.hitbox);
     }
    
     //inused method until now
@@ -384,6 +387,14 @@ public class Ghost extends Entity {
 
     public void setCurrentMode(String currentMode) {
         this.currentMode = currentMode;
+    }
+
+    public boolean isCanOut() {
+        return canOut;
+    }
+
+    public void setCanOut(boolean canOut) {
+        this.canOut = canOut;
     }
  
     

@@ -17,6 +17,7 @@ public class Map {
     
     
     private int map[];
+    public int numPills; //number of pills in the maze
     public int screenData[];
     public int [][] ghostHome = {{9,13},{9,14},{9,15}};
     
@@ -168,8 +169,10 @@ public class Map {
             screenData = new int [this.sizeX * this.sizeY];
             for(int i = 0; i < (this.sizeX * this.sizeY);i++) {
                 screenData[i] = map[i];
+                if (map[i] == 63 || map[i] == 64)
+                    numPills++; //increase the number of pills
             }
-        
+            
             //mapImages = new Image[40];
             loadMapImages();
    

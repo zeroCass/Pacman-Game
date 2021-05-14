@@ -14,6 +14,7 @@ import pacmangame.Map;
 public class Pacman extends Entity {
     Image [] pacmanImage;
     private int pacmanImageIdx; //idx of array of images
+    private boolean isDead;
     
     
     //constructor
@@ -25,7 +26,8 @@ public class Pacman extends Entity {
         this.direction = "none";
         this.next_direction = "none";
         this.pacmanImageIdx = 0;
-        pacmanImage = new Image[6];
+        this.isDead = false;
+        pacmanImage = new Image[7];
         
         loadImages();
         
@@ -40,6 +42,7 @@ public class Pacman extends Entity {
         pacmanImage[3] = new ImageIcon("images/pacman/pacman_left.gif").getImage();
         pacmanImage[4] = new ImageIcon("images/pacman/pacman_up.gif").getImage();
         pacmanImage[5] = new ImageIcon("images/pacman/pacman_down.gif").getImage();
+        pacmanImage[6] = new ImageIcon("images/pacman/pacman_dead.gif").getImage();
     }
 
     
@@ -107,16 +110,36 @@ public class Pacman extends Entity {
     public void render(Graphics g) {
         g.setColor(Color.YELLOW);
        //g.fillRect(this.x, this.y, GameEngine.TILE_SIZE, GameEngine.TILE_SIZE);
-       g.drawImage(this.pacmanImage[this.pacmanImageIdx], this.x, this.y, null);
+       if (!isDead) {
+            g.drawImage(this.pacmanImage[this.pacmanImageIdx], this.x, this.y, null);
+       }else {
+           g.drawImage(this.pacmanImage[6], this.x, this.y, null);
+       }
+       
        //Rectangle pac = new Rectangle(this.x, this.y, 30, 30);
        Graphics2D g2d = (Graphics2D) g;
-       g2d.draw(this.hitbox);
+       //g2d.draw(this.hitbox);
        
       // System.out.println(this.y/30 + " " + this.x/30);
         //System.out.println(this.y + " " + this.x + " " + this.y * 900 + this.x);
        //System.out.println(((this.y/30 * 30) + this.x/30) + " " + this.y/30 + " " + this.x/30);
         //System.out.println(this.x /30 + 30 * (int)(this.y/30));
     }
+    
+    
+    public void renderDeath(Graphics g) {
+        g.drawImage(this.pacmanImage[6], this.x, this.y, null);
+    }
 
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setIsDead(boolean isDead) {
+        this.isDead = isDead;
+    }
+    
+    
+    
     
 }
