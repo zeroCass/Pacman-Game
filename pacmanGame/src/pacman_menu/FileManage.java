@@ -34,5 +34,8 @@ public interface FileManage {
    
    //meth for save the file
    void saveFile();
+   
+   //can remove some line from the file
+   void removeLine(String toRemove);
 
 }

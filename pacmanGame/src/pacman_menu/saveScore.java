@@ -271,5 +271,9 @@ public class saveScore extends javax.swing.JFrame implements FileManage {
     private javax.swing.JButton yes_button;
     // End of variables declaration//GEN-END:variables
 
-
+    //unnused method
+    @Override
+    public void removeLine(String toRemove) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

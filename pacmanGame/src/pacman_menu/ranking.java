@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public final class ranking extends javax.swing.JFrame implements FileManage {
     ArrayList nicknames;
@@ -28,6 +29,7 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
             }
         tableRanking.setModel(ranking_model);
         tableRanking.setEnabled(false);
+        background_2.setVisible(false);
     }
     
     @Override
@@ -35,6 +37,51 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
         FileManage.super.readFile(nicknames, scores);
     }
     
+       @Override
+    public void removeLine(String toRemove) { 
+        boolean nickname_found = false; 
+        int idx_array = 0;
+        
+        for(int i = 0; i < nicknames.size(); i++){
+            if(nicknames.get(i).toString().equals(toRemove)){
+                idx_array = i; nickname_found = true;
+            }
+        }
+        
+        if(nickname_found){
+            if(nicknames.get(idx_array).toString().equals("zero.Cass") || nicknames.get(idx_array).toString().equals("MayaisKS")){
+                JOptionPane.showMessageDialog(null, "This Score cannot be removed", "Remove Score", JOptionPane.PLAIN_MESSAGE);
+            } else {
+                nicknames.remove(idx_array); scores.remove(idx_array);
+                JOptionPane.showMessageDialog(null, "This Score has been successfully removed", "Remove Score", JOptionPane.PLAIN_MESSAGE);
+            }
+        } else{
+            JOptionPane.showMessageDialog(null, "This Nickname and Score cannot be found", "Remove Score", JOptionPane.PLAIN_MESSAGE);
+        }
+            
+        saveFile();
+        this.setVisible(false);
+    }
+    
+    @Override
+    public void saveFile() {
+        FileManage.DIRECTORY.setWritable(true); //allows writing the writing of the file
+        try {
+            //FileOutputStream output = new FileOutputStream(FileManage.DIRECTORY, FileManage.ATTACH); //if true add new text at the end of the file
+            BufferedWriter bw;
+            bw = new BufferedWriter(new FileWriter(FileManage.DIRECTORY));
+                for(int i = 0; i < nicknames.size(); i++){
+                    String playerScores = nicknames.get(i) + "_" + scores.get(i) + "\n";
+                    bw.write(playerScores);     
+                }
+                bw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(saveScore.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        FileManage.DIRECTORY.setReadOnly(); //sets the file to read-only mode
+    }
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -46,8 +93,13 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableRanking = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        text_name = new javax.swing.JLabel();
+        text_score = new javax.swing.JLabel();
+        openPanel_button = new javax.swing.JButton();
+        background_2 = new javax.swing.JPanel();
+        text = new javax.swing.JLabel();
+        insert_text = new javax.swing.JTextField();
+        save_buttonScore = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -116,58 +168,144 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("CrackMan", 3, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("NAME:");
+        text_name.setFont(new java.awt.Font("CrackMan", 3, 36)); // NOI18N
+        text_name.setForeground(new java.awt.Color(255, 255, 255));
+        text_name.setText("NAME:");
 
-        jLabel2.setFont(new java.awt.Font("CrackMan", 3, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("SCORE:");
+        text_score.setFont(new java.awt.Font("CrackMan", 3, 36)); // NOI18N
+        text_score.setForeground(new java.awt.Color(255, 255, 255));
+        text_score.setText("SCORE:");
+
+        openPanel_button.setBackground(new java.awt.Color(0, 0, 0));
+        openPanel_button.setFont(new java.awt.Font("CrackMan", 0, 18)); // NOI18N
+        openPanel_button.setForeground(new java.awt.Color(238, 43, 42));
+        openPanel_button.setText("Click here if you want to remove something score!");
+        openPanel_button.setBorderPainted(false);
+        openPanel_button.setDefaultCapable(false);
+        openPanel_button.setFocusPainted(false);
+        openPanel_button.setFocusable(false);
+        openPanel_button.setRequestFocusEnabled(false);
+        openPanel_button.setRolloverEnabled(false);
+        openPanel_button.setVerifyInputWhenFocusTarget(false);
+        openPanel_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openPanel_buttonActionPerformed(evt);
+            }
+        });
+
+        background_2.setBackground(new java.awt.Color(0, 0, 0));
+        background_2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 43, 42)));
+
+        text.setBackground(new java.awt.Color(0, 0, 0));
+        text.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        text.setForeground(new java.awt.Color(255, 255, 255));
+        text.setText(" Enter the name corresponding to the Score you want to remove:");
+
+        insert_text.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insert_textActionPerformed(evt);
+            }
+        });
+
+        save_buttonScore.setBackground(new java.awt.Color(0, 0, 0));
+        save_buttonScore.setFont(new java.awt.Font("CrackMan", 0, 18)); // NOI18N
+        save_buttonScore.setForeground(new java.awt.Color(255, 255, 255));
+        save_buttonScore.setText("save");
+        save_buttonScore.setBorderPainted(false);
+        save_buttonScore.setDefaultCapable(false);
+        save_buttonScore.setFocusable(false);
+        save_buttonScore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                save_buttonScoreActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout background_2Layout = new javax.swing.GroupLayout(background_2);
+        background_2.setLayout(background_2Layout);
+        background_2Layout.setHorizontalGroup(
+            background_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(background_2Layout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(background_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_2Layout.createSequentialGroup()
+                        .addComponent(insert_text, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(save_buttonScore)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_2Layout.createSequentialGroup()
+                        .addComponent(text)
+                        .addGap(87, 87, 87))))
+        );
+        background_2Layout.setVerticalGroup(
+            background_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(background_2Layout.createSequentialGroup()
+                .addComponent(text)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(background_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(insert_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(save_buttonScore))
+                .addGap(0, 0, 0))
+        );
+
+        text.getAccessibleContext().setAccessibleName(" Enter the name corresponding to the Score you want to remove");
 
         javax.swing.GroupLayout background_rankingLayout = new javax.swing.GroupLayout(background_ranking);
         background_ranking.setLayout(background_rankingLayout);
         background_rankingLayout.setHorizontalGroup(
             background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background_rankingLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
                 .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(background_rankingLayout.createSequentialGroup()
-                        .addGap(219, 219, 219)
+                        .addGap(315, 315, 315)
                         .addComponent(title_ranking)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(button_back, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(background_rankingLayout.createSequentialGroup()
-                        .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, background_rankingLayout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(173, 173, 173)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 86, Short.MAX_VALUE)))
+                        .addGap(196, 196, 196)
+                        .addComponent(text_name, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(183, 183, 183)
+                        .addComponent(text_score, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_rankingLayout.createSequentialGroup()
+                .addGap(0, 61, Short.MAX_VALUE)
+                .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(background_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_rankingLayout.createSequentialGroup()
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(87, 87, 87))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_rankingLayout.createSequentialGroup()
+                            .addComponent(openPanel_button, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(168, 168, 168)))))
         );
         background_rankingLayout.setVerticalGroup(
             background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background_rankingLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(title_ranking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(button_back, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(60, 60, 60)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(background_rankingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(text_name)
+                    .addComponent(text_score))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(openPanel_button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(background_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
         button_back.getAccessibleContext().setAccessibleName("Back");
@@ -181,9 +319,7 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(background_ranking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(background_ranking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -209,6 +345,19 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
     private void button_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_backActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_button_backActionPerformed
+
+    private void openPanel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openPanel_buttonActionPerformed
+        background_2.setVisible(true);
+    }//GEN-LAST:event_openPanel_buttonActionPerformed
+
+    private void insert_textActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insert_textActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insert_textActionPerformed
+
+    private void save_buttonScoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save_buttonScoreActionPerformed
+       String toRemove = insert_text.getText();
+       removeLine(toRemove);
+    }//GEN-LAST:event_save_buttonScoreActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows Classic look and feel */
@@ -241,23 +390,20 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background_2;
     private javax.swing.JPanel background_ranking;
     private javax.swing.JButton button_back;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField insert_text;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton openPanel_button;
+    private javax.swing.JButton save_buttonScore;
     private javax.swing.JTable tableRanking;
+    private javax.swing.JLabel text;
+    private javax.swing.JLabel text_name;
+    private javax.swing.JLabel text_score;
     private javax.swing.JLabel title_ranking;
     // End of variables declaration//GEN-END:variables
     
-    //unnused method
-    @Override
-    public void saveFile() {
-        
-    }
-
-  
-
 }
