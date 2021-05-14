@@ -5,15 +5,15 @@ public class controls extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         //W/D/S/A
-        show_up.setEnabled(false);
-        show_right.setEnabled(false);
-        show_left.setEnabled(false);
-        show_down.setEnabled(false);
+        showUpW.setEnabled(false);
+        showRightD.setEnabled(false);
+        showLeftA.setEnabled(false);
+        showDownS.setEnabled(false);
         //ROWS
-        show_UP.setEnabled(false);
-        show_RIGHT.setEnabled(false);
-        show_LEFT.setEnabled(false);
-        show_DOWN.setEnabled(false);
+        showUp.setEnabled(false);
+        showRight.setEnabled(false);
+        showLeft.setEnabled(false);
+        showDown.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -33,10 +33,10 @@ public class controls extends javax.swing.JFrame {
         text_right = new javax.swing.JLabel();
         text_left = new javax.swing.JLabel();
         text_down = new javax.swing.JLabel();
-        show_up = new javax.swing.JTextField();
-        show_right = new javax.swing.JTextField();
-        show_left = new javax.swing.JTextField();
-        show_down = new javax.swing.JTextField();
+        showUpW = new javax.swing.JTextField();
+        showRightD = new javax.swing.JTextField();
+        showLeftA = new javax.swing.JTextField();
+        showDownS = new javax.swing.JTextField();
         block_2 = new javax.swing.JPanel();
         up_image = new javax.swing.JLabel();
         left_image = new javax.swing.JLabel();
@@ -46,10 +46,10 @@ public class controls extends javax.swing.JFrame {
         text_RIGHT = new javax.swing.JLabel();
         text_LEFT = new javax.swing.JLabel();
         text_DOWN = new javax.swing.JLabel();
-        show_UP = new javax.swing.JTextField();
-        show_RIGHT = new javax.swing.JTextField();
-        show_LEFT = new javax.swing.JTextField();
-        show_DOWN = new javax.swing.JTextField();
+        showUp = new javax.swing.JTextField();
+        showRight = new javax.swing.JTextField();
+        showLeft = new javax.swing.JTextField();
+        showDown = new javax.swing.JTextField();
         text_or = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
@@ -111,31 +111,31 @@ public class controls extends javax.swing.JFrame {
         text_down.setForeground(new java.awt.Color(255, 255, 255));
         text_down.setText("DOwn:");
 
-        show_up.setText("     W     ");
-        show_up.addActionListener(new java.awt.event.ActionListener() {
+        showUpW.setText("     W     ");
+        showUpW.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_upActionPerformed(evt);
+                showUpWActionPerformed(evt);
             }
         });
 
-        show_right.setText("      D     ");
-        show_right.addActionListener(new java.awt.event.ActionListener() {
+        showRightD.setText("      D     ");
+        showRightD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_rightActionPerformed(evt);
+                showRightDActionPerformed(evt);
             }
         });
 
-        show_left.setText("      A     ");
-        show_left.addActionListener(new java.awt.event.ActionListener() {
+        showLeftA.setText("      A     ");
+        showLeftA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_leftActionPerformed(evt);
+                showLeftAActionPerformed(evt);
             }
         });
 
-        show_down.setText("      S     ");
-        show_down.addActionListener(new java.awt.event.ActionListener() {
+        showDownS.setText("      S     ");
+        showDownS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_downActionPerformed(evt);
+                showDownSActionPerformed(evt);
             }
         });
 
@@ -163,8 +163,8 @@ public class controls extends javax.swing.JFrame {
                                 .addGap(31, 31, 31)))
                         .addGap(8, 8, 8)
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(show_right)
-                            .addComponent(show_up)))
+                            .addComponent(showRightD)
+                            .addComponent(showUpW)))
                     .addGroup(block_1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(D_image)
@@ -174,8 +174,8 @@ public class controls extends javax.swing.JFrame {
                             .addComponent(text_left))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(show_left, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                            .addComponent(show_down))))
+                            .addComponent(showLeftA, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(showDownS))))
                 .addContainerGap())
         );
         block_1Layout.setVerticalGroup(
@@ -186,19 +186,19 @@ public class controls extends javax.swing.JFrame {
                     .addGroup(block_1Layout.createSequentialGroup()
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_up)
-                            .addComponent(show_up, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(showUpW, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_right)
-                            .addComponent(show_right))
+                            .addComponent(showRightD))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_left)
-                            .addComponent(show_left, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(showLeftA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(block_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_down)
-                            .addComponent(show_down)))
+                            .addComponent(showDownS)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, block_1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(W_image)
@@ -247,31 +247,31 @@ public class controls extends javax.swing.JFrame {
         text_DOWN.setForeground(new java.awt.Color(255, 255, 255));
         text_DOWN.setText("DOwn:");
 
-        show_UP.setText("      ↑");
-        show_UP.addActionListener(new java.awt.event.ActionListener() {
+        showUp.setText("      ↑");
+        showUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_UPActionPerformed(evt);
+                showUpActionPerformed(evt);
             }
         });
 
-        show_RIGHT.setText("     →");
-        show_RIGHT.addActionListener(new java.awt.event.ActionListener() {
+        showRight.setText("     →");
+        showRight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_RIGHTActionPerformed(evt);
+                showRightActionPerformed(evt);
             }
         });
 
-        show_LEFT.setText("     ←");
-        show_LEFT.addActionListener(new java.awt.event.ActionListener() {
+        showLeft.setText("     ←");
+        showLeft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_LEFTActionPerformed(evt);
+                showLeftActionPerformed(evt);
             }
         });
 
-        show_DOWN.setText("      ↓");
-        show_DOWN.addActionListener(new java.awt.event.ActionListener() {
+        showDown.setText("      ↓");
+        showDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                show_DOWNActionPerformed(evt);
+                showDownActionPerformed(evt);
             }
         });
 
@@ -297,16 +297,16 @@ public class controls extends javax.swing.JFrame {
                             .addComponent(text_LEFT))
                         .addGap(31, 31, 31)
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(show_LEFT)
-                            .addComponent(show_DOWN)))
+                            .addComponent(showLeft)
+                            .addComponent(showDown)))
                     .addGroup(block_2Layout.createSequentialGroup()
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(text_UP)
                             .addComponent(text_RIGHT))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(show_UP)
-                            .addComponent(show_RIGHT, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
+                            .addComponent(showUp)
+                            .addComponent(showRight, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         block_2Layout.setVerticalGroup(
@@ -317,19 +317,19 @@ public class controls extends javax.swing.JFrame {
                     .addGroup(block_2Layout.createSequentialGroup()
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_UP)
-                            .addComponent(show_UP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(showUp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_RIGHT)
-                            .addComponent(show_RIGHT))
+                            .addComponent(showRight))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_LEFT)
-                            .addComponent(show_LEFT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(showLeft, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(block_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(text_DOWN)
-                            .addComponent(show_DOWN)))
+                            .addComponent(showDown)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, block_2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(up_image)
@@ -406,37 +406,37 @@ public class controls extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_button_backActionPerformed
 
-    private void show_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_upActionPerformed
+    private void showUpWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUpWActionPerformed
   
-    }//GEN-LAST:event_show_upActionPerformed
+    }//GEN-LAST:event_showUpWActionPerformed
 
-    private void show_rightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_rightActionPerformed
+    private void showRightDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRightDActionPerformed
 
-    }//GEN-LAST:event_show_rightActionPerformed
+    }//GEN-LAST:event_showRightDActionPerformed
 
-    private void show_leftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_leftActionPerformed
+    private void showLeftAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLeftAActionPerformed
 
-    }//GEN-LAST:event_show_leftActionPerformed
+    }//GEN-LAST:event_showLeftAActionPerformed
 
-    private void show_downActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_downActionPerformed
+    private void showDownSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDownSActionPerformed
 
-    }//GEN-LAST:event_show_downActionPerformed
+    }//GEN-LAST:event_showDownSActionPerformed
 
-    private void show_UPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_UPActionPerformed
+    private void showUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showUpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_show_UPActionPerformed
+    }//GEN-LAST:event_showUpActionPerformed
 
-    private void show_RIGHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_RIGHTActionPerformed
+    private void showRightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showRightActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_show_RIGHTActionPerformed
+    }//GEN-LAST:event_showRightActionPerformed
 
-    private void show_LEFTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_LEFTActionPerformed
+    private void showLeftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showLeftActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_show_LEFTActionPerformed
+    }//GEN-LAST:event_showLeftActionPerformed
 
-    private void show_DOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_show_DOWNActionPerformed
+    private void showDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showDownActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_show_DOWNActionPerformed
+    }//GEN-LAST:event_showDownActionPerformed
 
     public static void main(String args[]) {
         /* Set the Windows Classic look and feel */
@@ -478,14 +478,14 @@ public class controls extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel left_image;
     private javax.swing.JLabel right_image;
-    private javax.swing.JTextField show_DOWN;
-    private javax.swing.JTextField show_LEFT;
-    private javax.swing.JTextField show_RIGHT;
-    private javax.swing.JTextField show_UP;
-    private javax.swing.JTextField show_down;
-    private javax.swing.JTextField show_left;
-    private javax.swing.JTextField show_right;
-    private javax.swing.JTextField show_up;
+    private javax.swing.JTextField showDown;
+    private javax.swing.JTextField showDownS;
+    private javax.swing.JTextField showLeft;
+    private javax.swing.JTextField showLeftA;
+    private javax.swing.JTextField showRight;
+    private javax.swing.JTextField showRightD;
+    private javax.swing.JTextField showUp;
+    private javax.swing.JTextField showUpW;
     private javax.swing.JLabel text_DOWN;
     private javax.swing.JLabel text_LEFT;
     private javax.swing.JLabel text_RIGHT;

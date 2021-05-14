@@ -4,14 +4,16 @@ package pacmangame.entity;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+
+//this class is used as bluprint for pacman object (player) and enemies class (ghost)
 public abstract class Entity {
     //the coordinates values of pixels in screen
     protected int x;
     protected int y;
     
     //variables the contais the next(uncertain)
-    protected int req_x; 
-    protected int req_y;
+    protected int reqX; 
+    protected int reqY;
     
     //variables that decide the next position(for sure)
     protected int dx;
@@ -19,7 +21,7 @@ public abstract class Entity {
     
     protected int velocity;
     protected String direction; //current position
-    protected String next_direction; //the next position (able or not)
+    protected String nextDirection; //the next position (able or not)
     
    public Rectangle hitbox; //variable for check colisions
     
@@ -40,7 +42,7 @@ public abstract class Entity {
     }
 
     public void setDirection(String direction) {
-        this.next_direction = direction;
+        this.nextDirection = direction;
     }
 
     
@@ -77,20 +79,20 @@ public abstract class Entity {
         this.dy = dy;
     }
 
-    public int getReq_x() {
-        return req_x;
+    public int getReqX() {
+        return reqX;
     }
 
-    public void setReq_x(int req_x) {
-        this.req_x = req_x;
+    public void setReqX(int reqX) {
+        this.reqX = reqX;
     }
 
-    public int getReq_y() {
-        return req_y;
+    public int getReqY() {
+        return reqY;
     }
 
-    public void setReq_y(int req_y) {
-        this.req_y = req_y;
+    public void setReqY(int reqY) {
+        this.reqY = reqY;
     }
 
     public int getVelocity() {

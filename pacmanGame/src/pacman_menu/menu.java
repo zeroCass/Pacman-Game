@@ -10,14 +10,17 @@ import pacmangame.Sound;
 public class menu extends javax.swing.JFrame {
     private GameEngine gameEngine;
     public static JFrame Game;
-    Sound menu_music;
+    private int volume;
+    Sound menuMusic;
     
     public menu(){
         initComponents();
+        this.volume = 2;
         this.setResizable(false);
-        this.menu_music = new Sound("music/menu_music.wav");
-        this.menu_music.setVolume(0.25);
-        this.menu_music.loop();
+        this.menuMusic = new Sound("music/menu_music.wav");
+        this.menuMusic.setVolume(0.5);
+        //volume_bar.setValue(50);
+        this.menuMusic.loop();
         
         this.Game = new JFrame();
         this.gameEngine = new GameEngine();
@@ -39,6 +42,7 @@ public class menu extends javax.swing.JFrame {
         info_button = new javax.swing.JButton();
         exit_button = new javax.swing.JButton();
         ranking_button = new javax.swing.JButton();
+        volume_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pacman");
@@ -137,40 +141,57 @@ public class menu extends javax.swing.JFrame {
             }
         });
 
+        volume_button.setBackground(new java.awt.Color(0, 0, 0));
+        volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_2.png"))); // NOI18N
+        volume_button.setBorderPainted(false);
+        volume_button.setFocusable(false);
+        volume_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volume_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout background_01Layout = new javax.swing.GroupLayout(background_01);
         background_01.setLayout(background_01Layout);
         background_01Layout.setHorizontalGroup(
             background_01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_01Layout.createSequentialGroup()
-                .addContainerGap(72, Short.MAX_VALUE)
-                .addComponent(incon_image, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
             .addGroup(background_01Layout.createSequentialGroup()
-                .addGap(319, 319, 319)
-                .addGroup(background_01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(start_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ranking_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(info_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(controls_button, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                    .addComponent(exit_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(background_01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(background_01Layout.createSequentialGroup()
+                        .addGap(313, 313, 313)
+                        .addGroup(background_01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ranking_button, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(start_button, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(controls_button, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(exit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(background_01Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(volume_button, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, background_01Layout.createSequentialGroup()
+                .addGap(0, 68, Short.MAX_VALUE)
+                .addComponent(incon_image, javax.swing.GroupLayout.PREFERRED_SIZE, 766, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         background_01Layout.setVerticalGroup(
             background_01Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(background_01Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
+                .addComponent(volume_button)
+                .addGap(8, 8, 8)
                 .addComponent(incon_image)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(start_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ranking_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(controls_button, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(info_button, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(exit_button, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         start_button.getAccessibleContext().setAccessibleDescription("Press here to start the game");
@@ -193,12 +214,13 @@ public class menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void start_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_buttonActionPerformed
-        this.menu_music.stop();
+        this.menuMusic.stop();
         this.Game.setResizable(false);
         this.Game.setLocationRelativeTo(null);
         this.setVisible(false);
         this.Game.setVisible(true);
         this.gameEngine.start();
+
     }//GEN-LAST:event_start_buttonActionPerformed
 
     private void controls_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_controls_buttonActionPerformed
@@ -220,6 +242,42 @@ public class menu extends javax.swing.JFrame {
             Logger.getLogger(menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_ranking_buttonActionPerformed
+
+    private void volume_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volume_buttonActionPerformed
+        switch (this.volume) {
+            case 0 -> {
+                this.menuMusic.stop();
+                this.menuMusic.setVolume(1);
+                this.menuMusic.resume();
+                this.volume = 3;
+                volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_3.png")));
+            }
+            case 1 -> {
+                this.menuMusic.stop();
+                this.menuMusic.setVolume(0);
+                this.menuMusic.resume();
+                this.volume = 0;
+                volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_0.png")));
+            }
+            case 2 -> {
+                this.menuMusic.stop();
+                this.menuMusic.setVolume(0.3);
+                this.menuMusic.resume();
+                this.volume = 1;
+                volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_1.png")));
+            }
+            case 3 -> {
+                this.menuMusic.stop();
+                this.menuMusic.setVolume(0.5);
+                this.menuMusic.resume();
+                this.volume = 2;
+                volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_2.png")));
+            }
+            default -> {
+            }
+        }
+        //System.out.println(volume);
+    }//GEN-LAST:event_volume_buttonActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -256,5 +314,6 @@ public class menu extends javax.swing.JFrame {
     private javax.swing.JButton info_button;
     private javax.swing.JButton ranking_button;
     private javax.swing.JButton start_button;
+    private javax.swing.JButton volume_button;
     // End of variables declaration//GEN-END:variables
 }

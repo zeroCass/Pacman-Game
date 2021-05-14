@@ -41,8 +41,8 @@ public class ranking extends javax.swing.JFrame {
                 //add the line to the model
                 ranking_model.addRow(line);
             }
-        table_ranking.setModel(ranking_model);
-        table_ranking.setEnabled(false);
+        tableRanking.setModel(ranking_model);
+        tableRanking.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -55,7 +55,7 @@ public class ranking extends javax.swing.JFrame {
         button_back = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_ranking = new javax.swing.JTable();
+        tableRanking = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -92,7 +92,7 @@ public class ranking extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(238, 43, 42)));
         jPanel1.setFocusable(false);
 
-        table_ranking.setModel(new javax.swing.table.DefaultTableModel(
+        tableRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -115,11 +115,11 @@ public class ranking extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        table_ranking.setOpaque(false);
-        jScrollPane1.setViewportView(table_ranking);
-        if (table_ranking.getColumnModel().getColumnCount() > 0) {
-            table_ranking.getColumnModel().getColumn(0).setResizable(false);
-            table_ranking.getColumnModel().getColumn(1).setResizable(false);
+        tableRanking.setOpaque(false);
+        jScrollPane1.setViewportView(tableRanking);
+        if (tableRanking.getColumnModel().getColumnCount() > 0) {
+            tableRanking.getColumnModel().getColumn(0).setResizable(false);
+            tableRanking.getColumnModel().getColumn(1).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -202,18 +202,18 @@ public class ranking extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     private void table_rankingStyle(){
-        table_ranking.setRowHeight(45);
+        tableRanking.setRowHeight(45);
         
-        table_ranking.setShowGrid(true);
-        table_ranking.setGridColor(Color.red);
+        tableRanking.setShowGrid(true);
+        tableRanking.setGridColor(Color.red);
 
-        table_ranking.setBackground(Color.BLACK);
-        table_ranking.setForeground(Color.WHITE);
+        tableRanking.setBackground(Color.BLACK);
+        tableRanking.setForeground(Color.WHITE);
         
-        table_ranking.setSelectionBackground(Color.WHITE);
-        table_ranking.setSelectionForeground(Color.BLACK);
+        tableRanking.setSelectionBackground(Color.WHITE);
+        tableRanking.setSelectionForeground(Color.BLACK);
         
-        table_ranking.setFont(new Font("Comic Sans MS", Font.ITALIC, 24)); 
+        tableRanking.setFont(new Font("Comic Sans MS", Font.ITALIC, 24)); 
     }    
     
     private void button_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_backActionPerformed
@@ -258,7 +258,7 @@ public class ranking extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTable table_ranking;
+    private javax.swing.JTable tableRanking;
     private javax.swing.JLabel title_ranking;
     // End of variables declaration//GEN-END:variables
 

@@ -183,8 +183,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="show_right" max="32767" attributes="0"/>
-                                  <Component id="show_up" max="32767" attributes="0"/>
+                                  <Component id="showRightD" max="32767" attributes="0"/>
+                                  <Component id="showUpW" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -197,8 +197,8 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="show_left" pref="50" max="32767" attributes="0"/>
-                                  <Component id="show_down" max="32767" attributes="0"/>
+                                  <Component id="showLeftA" pref="50" max="32767" attributes="0"/>
+                                  <Component id="showDownS" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -214,22 +214,22 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_up" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_up" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="showUpW" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_right" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_right" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="showRightD" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_left" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_left" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="showLeftA" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_down" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_down" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="showDownS" alignment="3" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -346,36 +346,36 @@
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="text_down"/>
               </AccessibilityProperties>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_up">
+            <Component class="javax.swing.JTextField" name="showUpW">
               <Properties>
                 <Property name="text" type="java.lang.String" value="     W     "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_upActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showUpWActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_right">
+            <Component class="javax.swing.JTextField" name="showRightD">
               <Properties>
                 <Property name="text" type="java.lang.String" value="      D     "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_rightActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showRightDActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_left">
+            <Component class="javax.swing.JTextField" name="showLeftA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="      A     "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_leftActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showLeftAActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_down">
+            <Component class="javax.swing.JTextField" name="showDownS">
               <Properties>
                 <Property name="text" type="java.lang.String" value="      S     "/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_downActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showDownSActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -418,8 +418,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="show_LEFT" max="32767" attributes="0"/>
-                                  <Component id="show_DOWN" max="32767" attributes="0"/>
+                                  <Component id="showLeft" max="32767" attributes="0"/>
+                                  <Component id="showDown" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -429,8 +429,8 @@
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="show_UP" max="32767" attributes="0"/>
-                                  <Component id="show_RIGHT" pref="50" max="32767" attributes="0"/>
+                                  <Component id="showUp" max="32767" attributes="0"/>
+                                  <Component id="showRight" pref="50" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -446,22 +446,22 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_UP" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_UP" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="showUp" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_RIGHT" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_RIGHT" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="showRight" alignment="3" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_LEFT" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_LEFT" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="showLeft" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="text_DOWN" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="show_DOWN" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="showDown" alignment="3" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -565,36 +565,36 @@
                 <Property name="text" type="java.lang.String" value="DOwn:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_UP">
+            <Component class="javax.swing.JTextField" name="showUp">
               <Properties>
                 <Property name="text" type="java.lang.String" value="      &#x2191;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_UPActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showUpActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_RIGHT">
+            <Component class="javax.swing.JTextField" name="showRight">
               <Properties>
                 <Property name="text" type="java.lang.String" value="     &#x2192;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_RIGHTActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showRightActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_LEFT">
+            <Component class="javax.swing.JTextField" name="showLeft">
               <Properties>
                 <Property name="text" type="java.lang.String" value="     &#x2190;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_LEFTActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showLeftActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="show_DOWN">
+            <Component class="javax.swing.JTextField" name="showDown">
               <Properties>
                 <Property name="text" type="java.lang.String" value="      &#x2193;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="show_DOWNActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="showDownActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
