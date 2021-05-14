@@ -16,11 +16,11 @@ public class Clyde extends Ghost {
     }
     
         private void loadImagesPrivate () {
-        ghostImage[0] = new ImageIcon("images/Ghost/Clyde/clyde_default.gif").getImage(); //stand by
-        ghostImage[1] = new ImageIcon("images/Ghost/Clyde/clyde_right.gif").getImage();
-        ghostImage[2] = new ImageIcon("images/Ghost/Clyde/clyde_left.gif").getImage();
-        ghostImage[3] = new ImageIcon("images/Ghost/Clyde/clyde_up.gif").getImage();
-        ghostImage[4] = new ImageIcon("images/Ghost/Clyde/clyde_down.gif").getImage();
+        ghostImage[0] = new ImageIcon(getClass().getResource("/images/Ghost/Clyde/clyde_default.gif")).getImage(); //stand by
+        ghostImage[1] = new ImageIcon(getClass().getResource("/images/Ghost/Clyde/clyde_right.gif")).getImage();
+        ghostImage[2] = new ImageIcon(getClass().getResource("/images/Ghost/Clyde/clyde_left.gif")).getImage();
+        ghostImage[3] = new ImageIcon(getClass().getResource("/images/Ghost/Clyde/clyde_up.gif")).getImage();
+        ghostImage[4] = new ImageIcon(getClass().getResource("/images/Ghost/Clyde/clyde_down.gif")).getImage();
     }
     
     @Override

@@ -17,7 +17,7 @@ public class menu extends javax.swing.JFrame {
         initComponents();
         this.volume = 2;
         this.setResizable(false);
-        this.menuMusic = new Sound("music/menu_music.wav");
+        this.menuMusic = new Sound(getClass().getResource("/music/menu_music.wav"));
         this.menuMusic.setVolume(0.5);
         //volume_bar.setValue(50);
         this.menuMusic.loop();

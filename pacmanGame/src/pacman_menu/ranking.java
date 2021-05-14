@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ranking extends javax.swing.JFrame {
+public final class ranking extends javax.swing.JFrame implements FileManage {
     ArrayList nicknames;
     ArrayList scores;
     
@@ -16,23 +16,8 @@ public class ranking extends javax.swing.JFrame {
         scores = new ArrayList();
         initComponents();
         this.setResizable(false);
-        
-        try{
-            File directory = new File("ranking/ranking.txt"); //define the directory
-            String playerScores;
-            BufferedReader br;
-            
-            br = new BufferedReader(
-                    new FileReader(directory));            
-            while((playerScores = br.readLine())!= null){
-                int pos = playerScores.indexOf("_"); //check the position of their char "_"
-                nicknames.add(playerScores.substring(0, pos)); //the array recive just the nickname for the player
-                scores.add(playerScores.substring(pos+1,playerScores.length())); //the array recive just the scores for the player
-            }         
-            br.close();
-        }catch(FileNotFoundException ex){           
-        }
-        
+        readFile(nicknames, scores);
+           
         table_rankingStyle(); //define table style settings
         DefaultTableModel ranking_model = new DefaultTableModel(new Object[]{"", ""}, 0);
         for (int i = 0; i < nicknames.size(); i++) { //runs theought the array
@@ -43,6 +28,11 @@ public class ranking extends javax.swing.JFrame {
             }
         tableRanking.setModel(ranking_model);
         tableRanking.setEnabled(false);
+    }
+    
+    @Override
+    public void readFile(ArrayList nicknames, ArrayList scores) throws IOException {
+        FileManage.super.readFile(nicknames, scores);
     }
     
     @SuppressWarnings("unchecked")
@@ -261,5 +251,13 @@ public class ranking extends javax.swing.JFrame {
     private javax.swing.JTable tableRanking;
     private javax.swing.JLabel title_ranking;
     // End of variables declaration//GEN-END:variables
+    
+    //unnused method
+    @Override
+    public void saveFile() {
+        
+    }
+
+  
 
 }

@@ -1,9 +1,7 @@
-
 package pacmangame.entity;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
 
 //this class is used as bluprint for pacman object (player) and enemies class (ghost)
 public abstract class Entity {
@@ -23,19 +21,16 @@ public abstract class Entity {
     protected String direction; //current position
     protected String nextDirection; //the next position (able or not)
     
-   public Rectangle hitbox; //variable for check colisions
+    public Rectangle hitbox; //variable for check colisions
     
     //basic constructor
     public Entity() {
     }
-    
-    
+
     protected abstract void loadImages ();
     public void updateMovement () {}
     public abstract void render (Graphics g);
-    
-    
-    
+
     //getters and setters
     public String getDirection() {
         return direction;

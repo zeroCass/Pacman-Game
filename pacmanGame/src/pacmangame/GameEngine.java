@@ -8,8 +8,9 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
-import pacman_menu.save_score;
+import pacman_menu.saveScore;
 import pacmangame.entity.ghost.Blinky;
 import pacmangame.entity.ghost.Clyde;
 import pacmangame.entity.ghost.Inky;
@@ -37,14 +38,14 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     public static Thread thread;
     public static boolean running = false; //the main variable the makes game loop running
     
-    Sound soundDeath;
-    Sound soundPill;
-    Sound soundSuperPill;
-    Sound soundIntro;
-    Sound soundMainMusic;
-    Sound soundAteGhost;
-    Sound soundInterdimension;
-    Sound soundWin;
+    private Sound soundDeath;
+    private Sound soundPill;
+    private Sound soundSuperPill;
+    private Sound soundIntro;
+    private Sound soundMainMusic;
+    private Sound soundAteGhost;
+    private Sound soundInterdimension;
+    private Sound soundWin;
     
     private Font pacFont; //font of score points
     
@@ -54,7 +55,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     private Map map;
     //private ArrayList <Ghost> ghosts;
     private Ghost [] ghosts;
-    private Image pacman_live;
+    private Image pacmanLive;
     private Image [] ghostPoints;
      
     public GameEngine () {
@@ -89,26 +90,28 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     }
     
     private void initSound () {
-        this.soundDeath = new Sound("soundfx/pacman_death.wav");
-        this.soundMainMusic = new Sound("music/main.wav");
-        this.soundIntro = new Sound("soundfx/intro_2.wav");
-        this.soundPill = new Sound("soundfx/ate_pill.wav");
-        this.soundSuperPill = new Sound("soundfx/ate_super_pill.wav");
-        this.soundAteGhost = new Sound("soundfx/ate_ghost.wav");
-        this.soundWin = new Sound("soundfx/win.wav");
-        this.soundInterdimension = new Sound("music/interdimension.wav");
+        this.soundDeath = new Sound(getClass().getResource("/soundfx/pacman_death.wav"));
+        this.soundMainMusic = new Sound(getClass().getResource("/music/main.wav"));
+        this.soundIntro = new Sound(getClass().getResource("/soundfx/intro_2.wav"));
+        this.soundPill = new Sound(getClass().getResource("/soundfx/ate_pill.wav"));
+        this.soundSuperPill = new Sound(getClass().getResource("/soundfx/ate_super_pill.wav"));
+        this.soundAteGhost = new Sound(getClass().getResource("/soundfx/ate_ghost.wav"));
+        this.soundWin = new Sound(getClass().getResource("/soundfx/win.wav"));
+        this.soundInterdimension = new Sound(getClass().getResource("/music/interdimension.wav"));
     }
     
     private void initImages () {
         ghostPoints = new Image [4];
-        pacman_live = new ImageIcon("images/pacman/pacman_left.gif").getImage();
-        ghostPoints[0] = new ImageIcon("images/GameStates/200pts.png").getImage();
-        ghostPoints[1] = new ImageIcon("images/GameStates/400pts.png").getImage();
-        ghostPoints[2] = new ImageIcon("images/GameStates/800pts.png").getImage();
-        ghostPoints[3] = new ImageIcon("images/GameStates/1600pts.png").getImage();
+        pacmanLive = new ImageIcon(getClass().getResource("/images/pacman/pacman_left.gif")).getImage();
+        ghostPoints[0] = new ImageIcon(getClass().getResource("/images/gameState/200pts.png")).getImage();
+        ghostPoints[1] = new ImageIcon(getClass().getResource("/images/gameState/400pts.png")).getImage();
+        ghostPoints[2] = new ImageIcon(getClass().getResource("/images/gameState/800pts.png")).getImage();
+        ghostPoints[3] = new ImageIcon(getClass().getResource("/images/gameState/1600pts.png")).getImage();
         //init font
         try {
-            pacFont = Font.createFont(Font.TRUETYPE_FONT, new File("font/8-bit Arcade In.ttf")).deriveFont(35f);
+            //InputStream is = getClass().getResourceAsStream("/font/8-bit Arcade In.ttf");
+            //File file = new File(getClass().getResource("/font/8-bit Arcade In.ttf").getFile()); 
+            pacFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("/font/8-bit Arcade In.ttf")).deriveFont(35f);
         }catch (IOException | FontFormatException e) {
             System.out.println("Erro na fonte");
         }
@@ -183,7 +186,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
       
     //stop the thread (and open the next jframe)
     public synchronized void stop () {
-        new save_score().setVisible(true); //open the save score screen
+        new saveScore().setVisible(true); //open the save score screen
         running = false;
         try {
             thread.join();
@@ -202,6 +205,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         int miliseconds = 3000;
         if (winner) {
             miliseconds = 7000;
+            this.soundWin.play();
         }
             
         while (newTimer - timer < miliseconds) { 
@@ -247,8 +251,6 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //win condition
         if (map.numPills == 0) {
             winner = true;
-            //System.out.println("entrou yin condition");
-            this.soundWin.play();
             gameOver();
         }
                        
@@ -342,14 +344,14 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //render the win screen
         else if (!running && lives > 0 && !pauseTimer && !pacman.isDead() && winner){  
             Image youwin;
-            youwin = new ImageIcon("images/GameStates/youwin.png").getImage();
+            youwin = new ImageIcon(getClass().getResource("/images/gameState/youwin.png")).getImage();
             g.drawImage(youwin, 360, 335, null);
         }
         //if is not running, then it is in screen start or gameOver
         else if (!running && lives > 0 && !pauseTimer && !pacman.isDead()){
             //draw the ready intro
             Image ready;
-            ready = new ImageIcon("images/GameStates/ready.png").getImage();
+            ready = new ImageIcon(getClass().getResource("/images/gameState/ready.png")).getImage();
             g.drawImage(ready, 390, 335, null);
             //g.drawString("Read!", 420, 350);
             //play the start music
@@ -357,7 +359,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         //game over screen
         else if (!running && lives == 0) {
             Image gameover;
-            gameover = new ImageIcon("images/GameStates/gameover.png").getImage();
+            gameover = new ImageIcon(getClass().getResource("/images/gameState/gameover.png")).getImage();
             g.drawImage(gameover, 365, 335, null);
         }
         
@@ -370,7 +372,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         g.setColor(Color.black);
         g.fillRect(0, 600, 900, 50); //RE_draw the backgroud of the score
         for (int i = 0; i < lives; i++) {
-            g.drawImage(pacman_live, 860 - (i * 40), 610, null); //draw the lives
+            g.drawImage(pacmanLive, 860 - (i * 40), 610, null); //draw the lives
         }
         g.setColor(Color.white);
         //g.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -513,19 +515,20 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
      //check if the postiion of the pacman is a pill
     private void checkPills(int y, int x) {
         //normal pill
-        if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 63){
+        if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 45){
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             score+=10;
             this.soundPill.play();
             map.numPills--; //decrease number os pills remaning
         }
         //super pill
-        else if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 64) {
+        else if (map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] == 46) {
             map.screenData[x /GameEngine.TILE_SIZE + GameEngine.TILE_SIZE * (int)(y/GameEngine.TILE_SIZE)] = 0;
             score+=50;
             ateGhost = 0;
             this.soundSuperPill.play();
             this.soundMainMusic.stop();
+            this.soundInterdimension.stop(); //in case its already ´playing
             this.soundInterdimension.play();
             map.numPills--; //decrease number os pills remaning
             
