@@ -110,24 +110,22 @@ public class Ghost extends Entity {
                         node.add(newNode); //add the new position to the main node
                         //building the string path
                         switch (i) {
-                            case 0 -> {
+                            case 0 :
                                 path.add(currentPath.concat("D"));
                                 newCurrentPath = currentPath.concat("D");
-                            }
-                            case 1 -> {
+                                break;
+                            case 1 :
                                 path.add(currentPath.concat("L"));
-                                newCurrentPath = currentPath.concat("L");
-                            }
-                            case 2 -> {
+                               newCurrentPath = currentPath.concat("L");
+                               break;
+                            case 2 :
                                 path.add(currentPath.concat("R"));
                                 newCurrentPath = currentPath.concat("R");
-                            }
-                            case 3 -> {
+                                break;
+                            case 3 :
                                 path.add(currentPath.concat("U"));
                                 newCurrentPath = currentPath.concat("U");
-                            }
-                            default -> {
-                            }
+                                break;
                         }
                        
                         
@@ -268,7 +266,7 @@ public class Ghost extends Entity {
 
         //updates movement according to direction
         switch (this.direction) {
-                    case "up" -> {
+                    case "up" :
                         this.y-=velocity;
                         this.dx = 0;
                         this.dy = -1;
@@ -277,8 +275,9 @@ public class Ghost extends Entity {
                             this.ghostImageIdx = 3;
                         else if (this.currentMode.equals("eaten"))
                             this.ghostImageIdx = 7;
-            }
-                    case "down" -> {
+                        break;
+            
+                    case "down" :
                         this.y+=velocity;
                         this.dx = 0;
                         this.dy = 1;
@@ -287,8 +286,9 @@ public class Ghost extends Entity {
                             this.ghostImageIdx = 4;
                         else if (this.currentMode.equals("eaten"))
                             this.ghostImageIdx = 8;
-            }
-                    case "right" -> {
+                        break;
+            
+                    case "right" :
                         this.x+=velocity;
                         this.dx = 1;
                         this.dy = 0;
@@ -297,8 +297,9 @@ public class Ghost extends Entity {
                             this.ghostImageIdx = 1;
                         else if (this.currentMode.equals("eaten"))
                             this.ghostImageIdx = 5;
-            }
-                    case "left" -> {
+                        break;
+            
+                    case "left" :
                         this.x-=velocity;
                         this.dx = -1;
                         this.dy = 0;
@@ -307,13 +308,14 @@ public class Ghost extends Entity {
                             this.ghostImageIdx = 2;
                         else if (this.currentMode.equals("eaten"))
                             this.ghostImageIdx = 6;
-            }
-                    default -> {
+                        break;
+            
+                    default :
                         this.direction = "none";
                         this.ghostImageIdx = 0;
                         this.dx = 0;
                         this.dy = 0;
-            }
+            
         }
         //if the current mode is SCARED and scaredTimer is bigger than 7 sec, the image is blank
         if (this.currentMode.equals("scared") && GameEngine.scaredTimer > 7000)

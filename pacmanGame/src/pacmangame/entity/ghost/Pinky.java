@@ -27,26 +27,26 @@ public class Pinky extends Ghost {
 
        int nextY, nextX;
         switch (pacman.getDirection()) {
-            case "up" -> {
+            case "up" :
                 nextY = (pacman.getY() / GameEngine.TILE_SIZE) - 4;
                 nextX = (pacman.getX() / GameEngine.TILE_SIZE) - 4;
-            }
-            case "down" -> {
+                break;
+            case "down" :
                 nextY = (pacman.getY() / GameEngine.TILE_SIZE) + 4;
                 nextX = (pacman.getX() / GameEngine.TILE_SIZE);
-            }
-            case "right" -> {
+                break;
+            case "right" :
                 nextY = (pacman.getY() / GameEngine.TILE_SIZE);
                 nextX = (pacman.getX() / GameEngine.TILE_SIZE) + 4;
-            }
-            case "left" -> {
+                break;
+            case "left" :
                 nextY = (pacman.getY() / GameEngine.TILE_SIZE);
                 nextX = (pacman.getX() / GameEngine.TILE_SIZE) - 4;
-            }
-            default -> {
+                break;
+            default :
                 nextY = (pacman.getY() / GameEngine.TILE_SIZE);
                 nextX = (pacman.getX() / GameEngine.TILE_SIZE);
-            }
+                break;
         }
         
         if (nextX > 0 && nextX < GameEngine.MAZE_SIZE_X && nextY > 0 && nextY < GameEngine.MAZE_SIZE_Y 

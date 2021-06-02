@@ -554,46 +554,46 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_W -> {
+            case KeyEvent.VK_W :
                 pacman.setDirection("up");
                 pacman.setReqX(0);
                 pacman.setReqY(-1);
-            }
-            case KeyEvent.VK_UP -> {
+                break;
+            case KeyEvent.VK_UP :
                 pacman.setDirection("up");
                 pacman.setReqX(0);
                 pacman.setReqY(-1);
-            }
-            case KeyEvent.VK_S -> {
+                break;
+            case KeyEvent.VK_S :
                 pacman.setDirection("down");
                 pacman.setReqX(0);
                 pacman.setReqY(1);
-            }
-            case KeyEvent.VK_DOWN -> {
+                break;
+            case KeyEvent.VK_DOWN :
                 pacman.setDirection("down");
                 pacman.setReqX(0);
                 pacman.setReqY(1);
-            }
-            case KeyEvent.VK_D -> {
+                break;
+            case KeyEvent.VK_D :
                 pacman.setDirection("right");
                 pacman.setReqX(1);
                 pacman.setReqY(0);
-            }
-            case KeyEvent.VK_RIGHT -> {
+                break;
+            case KeyEvent.VK_RIGHT :
                 pacman.setDirection("right");
                 pacman.setReqX(1);
                 pacman.setReqY(0);
-            }
-            case KeyEvent.VK_A -> {
+                break;
+            case KeyEvent.VK_A :
                 pacman.setDirection("left");
                 pacman.setReqX(-1);
                 pacman.setReqY(0);
-            }
-            case KeyEvent.VK_LEFT -> {
+                break;
+            case KeyEvent.VK_LEFT :
                 pacman.setDirection("left");
                 pacman.setReqX(-1);
                 pacman.setReqY(0);
-            }
+                break;
         }
     }
     

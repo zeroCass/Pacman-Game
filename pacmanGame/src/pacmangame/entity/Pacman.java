@@ -62,32 +62,32 @@ public class Pacman extends Entity {
       }
           //determina a proxima direcao do pacman
           switch (this.direction) {
-                    case "up" -> {
+                    case "up" :
                         this.dx = 0;
                         this.dy = -1;
                         this.pacmanImageIdx = 4;
-            }
-                    case "down" -> {
+                        break;
+                    case "down" :
                         this.dx = 0;
                         this.dy = 1;
                         this.pacmanImageIdx = 5;
-            }
-                    case "right" -> {
+                        break;
+                    case "right" :
                         this.dx = 1;
                         this.dy = 0;
                         this.pacmanImageIdx = 2;
-            }
-                    case "left" -> {
+                        break;
+                    case "left" :
                         this.dx = -1;
                         this.dy = 0;
                         this.pacmanImageIdx = 3;
-            }
-                    default -> {
+                        break;
+                    default :
                         this.direction = "none";
                         this.dx = 0;
                         this.dy = 0;
                         this.pacmanImageIdx = 0;
-            }
+                        break;
                 }
               
               //faz com q o pacman ande de acordo coma  velocidade

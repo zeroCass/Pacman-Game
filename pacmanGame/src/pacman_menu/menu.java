@@ -245,36 +245,34 @@ public class menu extends javax.swing.JFrame {
 
     private void volume_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volume_buttonActionPerformed
         switch (this.volume) {
-            case 0 -> {
+            case 0 :
                 this.menuMusic.stop();
                 this.menuMusic.setVolume(1);
                 this.menuMusic.resume();
                 this.volume = 3;
                 volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_3.png")));
-            }
-            case 1 -> {
+                break;
+            case 1 :
                 this.menuMusic.stop();
                 this.menuMusic.setVolume(0);
                 this.menuMusic.resume();
                 this.volume = 0;
                 volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_0.png")));
-            }
-            case 2 -> {
+                break;
+            case 2 :
                 this.menuMusic.stop();
                 this.menuMusic.setVolume(0.3);
                 this.menuMusic.resume();
                 this.volume = 1;
                 volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_1.png")));
-            }
-            case 3 -> {
+                break;
+            case 3 : 
                 this.menuMusic.stop();
                 this.menuMusic.setVolume(0.5);
                 this.menuMusic.resume();
                 this.volume = 2;
                 volume_button.setIcon(new javax.swing.ImageIcon(getClass().getResource("/menu_images/volume_2.png")));
-            }
-            default -> {
-            }
+                break;
         }
         //System.out.println(volume);
     }//GEN-LAST:event_volume_buttonActionPerformed
