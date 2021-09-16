@@ -7,6 +7,7 @@
 
 # Download the game
 To download it, click in this link below and extract the files.
+[donwload it](https://github.com/zeroCass/Pacman-Game/releases/download/v1.10.1/Pacman.Game.rar)
 Execute the jar file and enjoy!!!.
  
  
