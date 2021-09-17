@@ -2,11 +2,17 @@
  Pacman game made in java for the final project of TP1(Programming topics ) discipline.
  
  # Initial Screen
-![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/menu_images/pinky.png?raw=true "Initial Screen")
+![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png?raw=true "Initial Screen")
  
+
+# Game images
+![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg0.png?raw=true "Game State 1")
+![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg1.png?raw=true "Game State 2")
+
 
 # Download the game
 To download it, click in this link below and extract the files.
+
 [donwload it](https://github.com/zeroCass/Pacman-Game/releases/download/v1.10.1/Pacman.Game.rar)
 Execute the jar file and enjoy!!!.
  
@@ -21,15 +27,15 @@ Execute the jar file and enjoy!!!.
  
 
  
-#Game Engine 
+# Game Engine 
  We build a game engine only for this project. So the game was made entire based on this game engine.
  The engine handle the collision detection, the movment of all objcts, the draw and update of game.
  So, the game is not optimized.
  
- #The map
+ # The map
  The map is a array of a lot images, so was though to do it, but for sure, exists a better and simply way to make it
  
- #Credits
+ # Credits
  The initial screen has a music that was take it from:
  
 
