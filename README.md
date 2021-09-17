@@ -2,7 +2,7 @@
  Pacman game made in java for the final project of TP1(Programming topics ) discipline.
  
  # Initial Screen
-![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png?raw=true "Initial Screen")
+![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png?raw=true "Initial Screen" | width=100)
  
 
 # Game images
