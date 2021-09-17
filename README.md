@@ -3,12 +3,11 @@
  
  # Initial Screen
  <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png" width=500>
-![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png?raw=true "Initial Screen" | width=100)
  
 
 # Game images
-![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg0.png?raw=true "Game State 1")
-![Alt Text](https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg1.png?raw=true "Game State 2")
+ <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg0.png" width=500>
+ <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg1.png" width=500>
 
 
 # Download the game
