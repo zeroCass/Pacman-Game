@@ -131,7 +131,7 @@ public class GameEngine extends Canvas implements Runnable, KeyListener {
         lives = 3;
         score = 0;
           
-        initObjects ();
+        initObjects();
         initImages();
         initSound();
 

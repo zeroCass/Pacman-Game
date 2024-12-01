@@ -65,11 +65,14 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
     
     @Override
     public void saveFile() {
-        FileManage.DIRECTORY.setWritable(true); //allows writing the writing of the file
+        FileManage.SAVE_FILE.setWritable(true); //allows writing the writing of the file
+
+
         try {
-            //FileOutputStream output = new FileOutputStream(FileManage.DIRECTORY, FileManage.ATTACH); //if true add new text at the end of the file
+            FileManage.verifyDirectory();
+            //FileOutputStream output = new FileOutputStream(FileManage.SAVE_FILE, FileManage.ATTACH); //if true add new text at the end of the file
             BufferedWriter bw;
-            bw = new BufferedWriter(new FileWriter(FileManage.DIRECTORY));
+            bw = new BufferedWriter(new FileWriter(FileManage.SAVE_FILE));
                 for(int i = 0; i < nicknames.size(); i++){
                     String playerScores = nicknames.get(i) + "_" + scores.get(i) + "\n";
                     bw.write(playerScores);     
@@ -79,7 +82,7 @@ public final class ranking extends javax.swing.JFrame implements FileManage {
             Logger.getLogger(saveScore.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        FileManage.DIRECTORY.setReadOnly(); //sets the file to read-only mode
+        FileManage.SAVE_FILE.setReadOnly(); //sets the file to read-only mode
     }
         
     @SuppressWarnings("unchecked")

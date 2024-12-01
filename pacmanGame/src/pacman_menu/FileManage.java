@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public interface FileManage {
    boolean ATTACH = true; //variable that verify if the file can be saved
-   File DIRECTORY = new File("ranking/ranking.txt"); //define the DIRECTORY
+   File SAVE_FILE = new File("ranking/ranking.txt"); //define the DIRECTORY
    
    //read the file and it is deafult 
    default void readFile(ArrayList nicknames, ArrayList scores) throws IOException {
@@ -31,6 +31,26 @@ public interface FileManage {
         }catch(FileNotFoundException ex){           
         }
    }
+
+    // verify if the DIR and the file ranking exists; if not, create
+    static void verifyDirectory() throws IOException {
+        File directoryFolder = SAVE_FILE.getParentFile(); // Get the folder "ranking"
+        if (!directoryFolder.exists()) {
+            if (directoryFolder.mkdirs()) {
+                System.out.println("Directory created: " + directoryFolder.getAbsolutePath());
+            } else {
+                throw new IOException("Failed to create directory: " + directoryFolder.getAbsolutePath());
+            }
+        }
+
+        if (!SAVE_FILE.exists()) {
+            if (SAVE_FILE.createNewFile()) {
+                System.out.println("File created: " + SAVE_FILE.getAbsolutePath());
+            } else {
+                throw new IOException("Failed to create file: " + SAVE_FILE.getAbsolutePath());
+            }
+        }
+    }
    
    //meth for save the file
    void saveFile();

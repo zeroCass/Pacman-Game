@@ -23,10 +23,11 @@ public class saveScore extends javax.swing.JFrame implements FileManage {
     public void saveFile() {
         String nickname = setNickname.getText(); //receceives the player's nickname
         String score = Integer.toString(GameEngine.score); //and your score
-        FileManage.DIRECTORY.setWritable(true); //allows writing the writing of the file
+        FileManage.SAVE_FILE.setWritable(true); //allows writing the writing of the file
 
         try {
-            FileOutputStream output = new FileOutputStream(FileManage.DIRECTORY, FileManage.ATTACH); //if true add new text at the end of the file
+            FileManage.verifyDirectory();
+            FileOutputStream output = new FileOutputStream(FileManage.SAVE_FILE, FileManage.ATTACH); //if true add new text at the end of the file
             BufferedWriter bw = new BufferedWriter(
                     new OutputStreamWriter(output));
                     String playerScores = nickname + "_" + score + "\n"; //now has nickname and score in a single String, both are separated by ""
@@ -36,7 +37,7 @@ public class saveScore extends javax.swing.JFrame implements FileManage {
             Logger.getLogger(saveScore.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        FileManage.DIRECTORY.setReadOnly(); //sets the file to read-only mode
+        FileManage.SAVE_FILE.setReadOnly(); //sets the file to read-only mode
     }
 
     
