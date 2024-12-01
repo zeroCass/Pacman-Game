@@ -1,5 +1,12 @@
 # Pacman-Game
  Pacman game made in java for the final project of TP1(Programming topics ) discipline.
+
+# Download the game
+To download it, click in this link below and extract the files.
+
+[donwload it](https://github.com/zeroCass/Pacman-Game/releases/tag/v1.10.2)
+Execute the jar file and enjoy!!!.
+
  
  # Initial Screen
  <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/menuImg.png" width=500>
@@ -8,13 +15,6 @@
 # Game images
  <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg0.png" width=500>
  <img src="https://github.com/zeroCass/Pacman-Game/blob/main/pacmanGame/src/images/readmeImg/gameImg1.png" width=500>
-
-
-# Download the game
-To download it, click in this link below and extract the files.
-
-[donwload it](https://github.com/zeroCass/Pacman-Game/releases/download/v1.10.1/Pacman.Game.rar)
-Execute the jar file and enjoy!!!.
  
  
  
